@@ -6,21 +6,17 @@ package com.l2ashdz.layeredimager.model;
  * @time 21:25:10
  * @author asael
  */
-public class Capa {
+public class Capa extends Objeto {
 
-    private int id;
     private String nombre;
     //private MatrizCapa
 
     public Capa() {
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+    public Capa(String nombre, int id) {
+        super(id);
+        this.nombre = nombre;
     }
 
     public String getNombre() {

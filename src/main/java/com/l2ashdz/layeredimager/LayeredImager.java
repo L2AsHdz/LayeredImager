@@ -1,7 +1,7 @@
 package com.l2ashdz.layeredimager;
 
 import com.l2ashdz.layeredimager.edd.list.List;
-import com.l2ashdz.layeredimager.edd.list.UserList;
+import com.l2ashdz.layeredimager.model.Capa;
 import com.l2ashdz.layeredimager.model.Usuario;
 
 /**
@@ -19,7 +19,7 @@ public class LayeredImager {
         Usuario user4 = new Usuario(4, "nombre4");
         Usuario user5 = new Usuario(5, "nombre5");
         
-        List<Usuario> userList = new UserList();
+        List userList = new List();
         
         userList.agregar(user1);
         userList.agregar(user2);
@@ -29,7 +29,7 @@ public class LayeredImager {
         
         userList.mostrar();
         
-        Usuario userObtenido = userList.obtener(5);
+        Usuario userObtenido = (Usuario) userList.obtener(5);
         
         System.out.println("\n" + userObtenido.getNombre());
         
@@ -37,5 +37,17 @@ public class LayeredImager {
         userList.eliminar(4);
         System.out.println();
         userList.mostrar();
+        
+        Capa cap1 = new Capa("capa1", 1);
+        Capa cap2 = new Capa("capa2", 2);
+        Capa cap3 = new Capa("capa3", 3);
+        
+        List capList = new List();
+        System.out.println("");
+        capList.agregar(cap1);
+        capList.agregar(cap2);
+        capList.agregar(cap3);
+        
+        capList.mostrar();
     }
 }

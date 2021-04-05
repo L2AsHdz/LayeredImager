@@ -2,19 +2,18 @@ package com.l2ashdz.layeredimager.model;
 
 /**
  *
- * @date 4/04/2021
- * @time 21:23:40
+ * @date 5/04/2021
+ * @time 10:34:19
  * @author asael
  */
-public class Usuario extends Objeto {
+public class Imagen extends Objeto {
 
     private String nombre;
-    //private ListaImagenes
 
-    public Usuario() {
+    public Imagen() {
     }
 
-    public Usuario(int id, String nombre) {
+    public Imagen(String nombre, int id) {
         super(id);
         this.nombre = nombre;
     }
