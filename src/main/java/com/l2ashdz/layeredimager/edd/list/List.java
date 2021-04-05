@@ -12,7 +12,7 @@ import com.l2ashdz.layeredimager.edd.Nodo;
 public abstract class List<T> {
     
     protected Nodo<T> inicio;
-    private int size = 0;
+    protected int size = 0;
     
     public void agregar(T t) {
         Nodo<T> nuevo = new Nodo(t);
@@ -28,6 +28,7 @@ public abstract class List<T> {
             
             temp.setNext(nuevo);
         }
+        size++;
     }
     
     public int size() {

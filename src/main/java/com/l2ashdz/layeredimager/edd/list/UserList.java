@@ -31,6 +31,7 @@ public class UserList extends List<Usuario> {
         
         if (actual.getDato().getId() == id) {
             inicio = actual.getNext();
+            size--;
             return actual.getDato();
         } else {
             Nodo<Usuario> temp;
@@ -38,8 +39,10 @@ public class UserList extends List<Usuario> {
                 if (actual.getNext().getDato().getId() == id) {
                     temp = actual.getNext();
                     actual.setNext(temp.getNext());
+                    size--;
                     return temp.getDato();
                 }
+                actual = actual.getNext();
             }
         }
         

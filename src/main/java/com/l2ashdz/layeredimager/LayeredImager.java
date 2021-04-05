@@ -33,8 +33,8 @@ public class LayeredImager {
         
         System.out.println("\n" + userObtenido.getNombre());
         
-        //userList.eliminar(3);
-        //userList.eliminar(4);
+        userList.eliminar(5);
+        userList.eliminar(4);
         System.out.println();
         userList.mostrar();
     }
