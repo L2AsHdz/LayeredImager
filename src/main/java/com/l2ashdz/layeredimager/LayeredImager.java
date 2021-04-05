@@ -1,6 +1,8 @@
 package com.l2ashdz.layeredimager;
 
-import com.l2ashdz.layeredimager.edd.list.LinkedList;
+import com.l2ashdz.layeredimager.edd.list.List;
+import com.l2ashdz.layeredimager.edd.list.UserList;
+import com.l2ashdz.layeredimager.model.Usuario;
 
 /**
  *
@@ -11,14 +13,29 @@ import com.l2ashdz.layeredimager.edd.list.LinkedList;
 public class LayeredImager {
 
     public static void main(String[] args) {
-        LinkedList lista = new LinkedList();
-        lista.agregar(1);
-        lista.agregar(2);
-        lista.agregar(3);
-        lista.agregar(4);
-        lista.agregar(5);
-        lista.agregar(6);
+        Usuario user1 = new Usuario(1, "nombre1");
+        Usuario user2 = new Usuario(2, "nombre2");
+        Usuario user3 = new Usuario(3, "nombre3");
+        Usuario user4 = new Usuario(4, "nombre4");
+        Usuario user5 = new Usuario(5, "nombre5");
         
-        //lista.mostrarLista();
+        List<Usuario> userList = new UserList();
+        
+        userList.agregar(user1);
+        userList.agregar(user2);
+        userList.agregar(user3);
+        userList.agregar(user4);
+        userList.agregar(user5);
+        
+        userList.mostrar();
+        
+        Usuario userObtenido = userList.obtener(5);
+        
+        System.out.println("\n" + userObtenido.getNombre());
+        
+        //userList.eliminar(3);
+        //userList.eliminar(4);
+        System.out.println();
+        userList.mostrar();
     }
 }

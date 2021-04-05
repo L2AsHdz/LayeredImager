@@ -10,10 +10,10 @@ package com.l2ashdz.layeredimager.edd;
 public class Nodo<T> {
 
     private T dato;
-    private Nodo next;
-    private Nodo prev;
-    private Nodo above;
-    private Nodo below;
+    private Nodo<T> next;
+    private Nodo<T> prev;
+    private Nodo<T> above;
+    private Nodo<T> below;
 
     public Nodo() {
     }
@@ -30,35 +30,35 @@ public class Nodo<T> {
         this.dato = dato;
     }
 
-    public Nodo getNext() {
+    public Nodo<T> getNext() {
         return next;
     }
 
-    public void setNext(Nodo next) {
+    public void setNext(Nodo<T> next) {
         this.next = next;
     }
 
-    public Nodo getPrev() {
+    public Nodo<T> getPrev() {
         return prev;
     }
 
-    public void setPrev(Nodo prev) {
+    public void setPrev(Nodo<T> prev) {
         this.prev = prev;
     }
 
-    public Nodo getAbove() {
+    public Nodo<T> getAbove() {
         return above;
     }
 
-    public void setAbove(Nodo above) {
+    public void setAbove(Nodo<T> above) {
         this.above = above;
     }
 
-    public Nodo getBelow() {
+    public Nodo<T> getBelow() {
         return below;
     }
 
-    public void setBelow(Nodo below) {
+    public void setBelow(Nodo<T> below) {
         this.below = below;
     }
 }
