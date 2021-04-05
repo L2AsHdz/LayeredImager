@@ -7,15 +7,19 @@ package com.l2ashdz.layeredimager.edd;
  * @time 13:25:00
  * @author asael
  */
-public class Node<T> {
+public class Nodo<T> {
 
     private T dato;
-    private Node next;
-    private Node prev;
-    private Node above;
-    private Node below;
+    private Nodo next;
+    private Nodo prev;
+    private Nodo above;
+    private Nodo below;
 
-    public Node() {
+    public Nodo() {
+    }
+
+    public Nodo(T dato) {
+        this.dato = dato;
     }
 
     public T getDato() {
@@ -26,35 +30,35 @@ public class Node<T> {
         this.dato = dato;
     }
 
-    public Node getNext() {
+    public Nodo getNext() {
         return next;
     }
 
-    public void setNext(Node next) {
+    public void setNext(Nodo next) {
         this.next = next;
     }
 
-    public Node getPrev() {
+    public Nodo getPrev() {
         return prev;
     }
 
-    public void setPrev(Node prev) {
+    public void setPrev(Nodo prev) {
         this.prev = prev;
     }
 
-    public Node getAbove() {
+    public Nodo getAbove() {
         return above;
     }
 
-    public void setAbove(Node above) {
+    public void setAbove(Nodo above) {
         this.above = above;
     }
 
-    public Node getBelow() {
+    public Nodo getBelow() {
         return below;
     }
 
-    public void setBelow(Node below) {
+    public void setBelow(Nodo below) {
         this.below = below;
     }
 }
