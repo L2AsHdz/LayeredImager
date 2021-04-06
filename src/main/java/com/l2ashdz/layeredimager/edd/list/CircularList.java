@@ -36,6 +36,19 @@ public class CircularList {
         size++;
         ultimo = nuevo;
     }
+    
+    public Imagen get(int id) {
+        Nodo<Imagen> actual = primero;
+        
+        do {
+            if (actual.getDato().getId() == id) {
+                return actual.getDato();
+            }
+            actual = actual.getNext();
+        } while (actual != primero);
+        
+        return null;
+    }
 
     public Imagen remove(int id) {
         Nodo<Imagen> actual = primero;
@@ -82,5 +95,13 @@ public class CircularList {
             } while (actual != primero);
 
         }
+    }
+    
+    public int size() {
+        return this.size;
+    }
+    
+    public boolean isEmpty() {
+        return primero == null;
     }
 }

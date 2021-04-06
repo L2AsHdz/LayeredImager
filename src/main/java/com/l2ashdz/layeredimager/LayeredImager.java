@@ -55,9 +55,9 @@ public class LayeredImager {
     
     private static void pruebaListaIamgen() {
         Imagen img1 = new Imagen("img1", 1);
-        Imagen img2 = new Imagen("img1", 2);
-        Imagen img3 = new Imagen("img1", 3);
-        Imagen img4 = new Imagen("img1", 4);
+        Imagen img2 = new Imagen("img2", 2);
+        Imagen img3 = new Imagen("img3", 3);
+        Imagen img4 = new Imagen("img4", 4);
         
         CircularList imgList = new CircularList();
         
@@ -71,8 +71,11 @@ public class LayeredImager {
         System.out.println("Elimando datos");
         imgList.remove(2);
         imgList.remove(1);
-        imgList.remove(4);
-        imgList.remove(3);
         imgList.show();
+        
+        Imagen img = imgList.get(4);
+        
+        System.out.println("Objeto obtenido");
+        System.out.println(img.getNombre());
     }
 }
