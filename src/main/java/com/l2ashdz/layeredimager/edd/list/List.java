@@ -12,9 +12,13 @@ import com.l2ashdz.layeredimager.model.Objeto;
 public class List {
     
     protected Nodo<Objeto> inicio;
-    protected int size = 0;
+    protected int size;
+
+    public List() {
+        this.size = 0;
+    }
     
-    public void agregar(Objeto t) {
+    public void add(Objeto t) {
         Nodo<Objeto> nuevo = new Nodo(t);
         
         if (inicio == null) {
@@ -39,7 +43,7 @@ public class List {
         return inicio == null;
     }
     
-    public Objeto obtener(int id) {
+    public Objeto get(int id) {
         Nodo<Objeto> actual = inicio;
         
         while (actual != null) {
@@ -52,7 +56,7 @@ public class List {
         return null;
     }
     
-    public Objeto eliminar(int id) {
+    public Objeto remove(int id) {
         Nodo<Objeto> actual = inicio;
         
         if (actual.getDato().getId() == id) {
@@ -75,7 +79,7 @@ public class List {
         return null;
     }
     
-    public void mostrar() {
+    public void show() {
         Nodo<Objeto> actual = inicio;
         
         if (actual == null) {
