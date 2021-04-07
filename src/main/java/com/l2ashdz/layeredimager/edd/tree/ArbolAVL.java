@@ -79,7 +79,9 @@ public class ArbolAVL {
     }
 
     public int getBalanceFactor(TreeNode<Objeto> root) {
-        if (root.getRight() == null & root.getLeft() != null) {
+        if (root == null) {
+            return 0;
+        } else if (root.getRight() == null & root.getLeft() != null) {
             return -(getHeight(root.getLeft()) + 1);
         } else if (root.getRight() != null & root.getLeft() == null) {
             return getHeight(root.getRight()) + 1;
@@ -144,24 +146,88 @@ public class ArbolAVL {
         }
     }
     
-    private Objeto getAVL(int id, TreeNode<Objeto> r) {
+    private TreeNode<Objeto> get(int id, TreeNode<Objeto> root) {
         
         if (root == null) {
             return null;
-        } else if (r.getDato().getId() == id) {
-            return r.getDato();
-        } else if (id < r.getDato().getId()) {
-            return getAVL(id, r.getLeft());
+        } else if (root.getDato().getId() == id) {
+            return root;
+        } else if (id < root.getDato().getId()) {
+            return get(id, root.getLeft());
         } else {
-            return getAVL(id, r.getRight());
+            return get(id, root.getRight());
         }
     }
     
     public Objeto get(int id) {
-        return getAVL(id, root);
+        return get(id, root).getDato();
+    }
+    
+    private TreeNode<Objeto> remove(int id, TreeNode<Objeto> root) {
+        TreeNode<Objeto> actual = root;
+        
+        if (actual == null) {
+            return actual;
+        }
+        
+        if (id < actual.getDato().getId()) {
+            actual.setLeft(remove(id, actual.getLeft()));
+        } else if (id > actual.getDato().getId()) {
+            actual.setRight(remove(id, actual.getRight()));
+        } else {
+            
+            if (actual.getLeft() == null | actual.getRight() == null) {
+                TreeNode<Objeto> aux = null;
+                if (aux == actual.getLeft()) {
+                    aux = actual.getRight();
+                } else {
+                    aux = actual.getLeft();
+                }
+                
+                if (aux == null) {
+                    actual = null;
+                } else {
+                    actual = aux;
+                }
+            } else {
+                TreeNode<Objeto> reemplazo = getReemplazo(actual.getLeft());
+                actual.setDato(reemplazo.getDato());
+                actual.setLeft(remove(reemplazo.getDato().getId(), actual.getLeft()));
+            }
+        }
+        
+        //eliminar este if
+        if (actual == null) {
+            return actual;
+        }
+        
+        int balanceFactor = getBalanceFactor(actual);
+        
+        //cambiar por == 2
+        if ((balanceFactor > 1) & (getBalanceFactor(actual.getLeft()) >= 0)) {
+            return leftRotation(actual);
+        } else if (balanceFactor < -1 & getBalanceFactor(actual.getRight()) <= 0) {
+            return rightRotation(actual);
+        } else if (balanceFactor > 1 & getBalanceFactor(actual.getLeft())  < 0) {
+            return leftDoubleRotation(actual);
+        } else if (balanceFactor < -1 & getBalanceFactor(actual.getRight()) > 0) {
+            return rightDoubleRotation(actual);
+        }
+        
+        return actual;
     }
     
     public Objeto remove(int id) {
-        return null;
+        return remove(id, root).getDato();
+    }
+
+    private TreeNode<Objeto> getReemplazo(TreeNode<Objeto> root) {
+        TreeNode<Objeto> actual = root;
+        
+        while (actual.getRight()!= null) {
+            actual = actual.getRight();
+        }
+        
+        return actual;
     }
 }

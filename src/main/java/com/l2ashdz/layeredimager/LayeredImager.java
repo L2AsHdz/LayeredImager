@@ -48,6 +48,11 @@ public class LayeredImager {
         arbol.inOrden(arbol.getRaiz());
 
         Usuario userR = (Usuario) arbol.get(-1);
+        
+        arbol.remove(0);
+        
+        System.out.println();
+        arbol.inOrden(arbol.getRaiz());
 
         System.out.println("\n" + userR.getNombre());
     }
