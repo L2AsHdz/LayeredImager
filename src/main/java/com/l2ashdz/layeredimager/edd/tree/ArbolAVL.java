@@ -143,5 +143,18 @@ public class ArbolAVL {
             root = insert(nuevo, root);
         }
     }
+    
+    public Objeto get(int id, TreeNode<Objeto> r) {
+        
+        if (root == null) {
+            return null;
+        } else if (r.getDato().getId() == id) {
+            return r.getDato();
+        } else if (id < r.getDato().getId()) {
+            return get(id, r.getLeft());
+        } else {
+            return get(id, r.getRight());
+        }
+    }
 
 }
