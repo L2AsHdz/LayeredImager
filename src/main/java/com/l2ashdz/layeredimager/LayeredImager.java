@@ -2,6 +2,7 @@ package com.l2ashdz.layeredimager;
 
 import com.l2ashdz.layeredimager.edd.list.CircularList;
 import com.l2ashdz.layeredimager.edd.list.List;
+import com.l2ashdz.layeredimager.edd.tree.ArbolAVL;
 import com.l2ashdz.layeredimager.model.Capa;
 import com.l2ashdz.layeredimager.model.Imagen;
 import com.l2ashdz.layeredimager.model.Usuario;
@@ -15,7 +16,35 @@ import com.l2ashdz.layeredimager.model.Usuario;
 public class LayeredImager {
 
     public static void main(String[] args) {
-        pruebaListaIamgen();
+        //pruebaListaIamgen();
+        pruebaArbolAVL();
+    }
+    
+    private static void pruebaArbolAVL() {
+        ArbolAVL arbol = new ArbolAVL();
+        
+        Usuario user1 = new Usuario(10, "nombre1");
+        Usuario user2 = new Usuario(5, "nombre2");
+        Usuario user3 = new Usuario(13, "nombre3");
+        Usuario user4 = new Usuario(1, "nombre4");
+        Usuario user5 = new Usuario(6, "nombre5");
+        Usuario user6 = new Usuario(17, "nombre5");
+        Usuario user7 = new Usuario(16, "nombre5");
+        Usuario user8 = new Usuario(0, "nombre5");
+        Usuario user9 = new Usuario(-1, "nombre5");
+        
+        arbol.add(user1);
+        arbol.add(user2);
+        arbol.add(user3);
+        arbol.add(user4);
+        arbol.add(user5);
+        arbol.add(user6);
+        arbol.add(user7);
+        arbol.add(user8);
+        arbol.add(user9);
+        
+        arbol.inOrden(arbol.getRaiz());
+        
     }
     
     private static void pruebaListaUsuario() {
