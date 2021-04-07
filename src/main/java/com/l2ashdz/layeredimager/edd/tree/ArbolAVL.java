@@ -144,17 +144,24 @@ public class ArbolAVL {
         }
     }
     
-    public Objeto get(int id, TreeNode<Objeto> r) {
+    private Objeto getAVL(int id, TreeNode<Objeto> r) {
         
         if (root == null) {
             return null;
         } else if (r.getDato().getId() == id) {
             return r.getDato();
         } else if (id < r.getDato().getId()) {
-            return get(id, r.getLeft());
+            return getAVL(id, r.getLeft());
         } else {
-            return get(id, r.getRight());
+            return getAVL(id, r.getRight());
         }
     }
-
+    
+    public Objeto get(int id) {
+        return getAVL(id, root);
+    }
+    
+    public Objeto remove(int id) {
+        return null;
+    }
 }
