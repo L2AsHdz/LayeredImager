@@ -80,9 +80,9 @@ public class ArbolAVL {
 
     public int getBalanceFactor(TreeNode<Objeto> root) {
         if (root.getRight() == null & root.getLeft() != null) {
-            return -getHeight(root.getLeft());
+            return -(getHeight(root.getLeft()) + 1);
         } else if (root.getRight() != null & root.getLeft() == null) {
-            return getHeight(root.getRight());
+            return getHeight(root.getRight()) + 1;
         } else if (root.getRight() != null & root.getLeft() != null) {
             return getHeight(root.getRight()) - getHeight(root.getLeft());
         } else {
@@ -107,9 +107,9 @@ public class ArbolAVL {
 
                 if (getBalanceFactor(root) == -2) {
                     if (nuevo.getDato().getId() < root.getLeft().getDato().getId()) {
-                        newRoot = leftRotation(root);
+                        newRoot = rightRotation(root);
                     } else {
-                        newRoot = leftDoubleRotation(root);
+                        newRoot = rightDoubleRotation(root);
                     }
                 }
             }
@@ -121,9 +121,9 @@ public class ArbolAVL {
 
                 if (getBalanceFactor(root) == 2) {
                     if (nuevo.getDato().getId() > root.getRight().getDato().getId()) {
-                        newRoot = rightRotation(root);
+                        newRoot = leftRotation(root);
                     } else {
-                        newRoot = rightDoubleRotation(root);
+                        newRoot = leftDoubleRotation(root);
                     }
                 }
             }

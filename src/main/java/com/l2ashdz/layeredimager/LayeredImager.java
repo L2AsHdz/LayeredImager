@@ -31,7 +31,8 @@ public class LayeredImager {
         Usuario user6 = new Usuario(17, "nombre5");
         Usuario user7 = new Usuario(16, "nombre5");
         Usuario user8 = new Usuario(0, "nombre5");
-        Usuario user9 = new Usuario(-1, "nombre544");
+        Usuario user9 = new Usuario(-1, "menos1");
+        Usuario user10 = new Usuario(-5, "nombre544");
 
         arbol.add(user1);
         arbol.add(user2);
@@ -42,6 +43,7 @@ public class LayeredImager {
         arbol.add(user7);
         arbol.add(user8);
         arbol.add(user9);
+        arbol.add(user10);
 
         arbol.inOrden(arbol.getRaiz());
 
