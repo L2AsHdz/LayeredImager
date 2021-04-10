@@ -2,10 +2,13 @@ package com.l2ashdz.layeredimager;
 
 import com.l2ashdz.layeredimager.edd.list.CircularList;
 import com.l2ashdz.layeredimager.edd.list.List;
+import com.l2ashdz.layeredimager.edd.sparsematrix.SparseMatrix;
 import com.l2ashdz.layeredimager.edd.tree.ArbolAVL;
+import com.l2ashdz.layeredimager.generator.sparsematrix.SparseMatrixGraphvizCodeGenerator;
 import com.l2ashdz.layeredimager.model.Capa;
 import com.l2ashdz.layeredimager.model.Imagen;
 import com.l2ashdz.layeredimager.model.Usuario;
+import static com.l2ashdz.layeredimager.controller.FileController.saveFile;
 
 /**
  *
@@ -17,7 +20,21 @@ public class LayeredImager {
 
     public static void main(String[] args) {
         //pruebaListaIamgen();
-        pruebaArbolAVL();
+        //pruebaArbolAVL();
+        pruebaMatriz();
+    }
+    
+    public static void pruebaMatriz() {
+        SparseMatrix matriz = new SparseMatrix();
+        
+        matriz.add(1, 3, 3);
+        matriz.add(1, 5, 5);
+        matriz.add(1, 1, 1);
+        matriz.add(1, 4, 4);
+        matriz.add(1, 10, 10);
+        var generator = new SparseMatrixGraphvizCodeGenerator(matriz); 
+        
+        saveFile("matriz.dot", generator.generate());
     }
 
     private static void pruebaArbolAVL() {

@@ -25,10 +25,12 @@ public class SparseMatrixGraphvizCodeGenerator extends Generator {
         generateHeader();
         generateYAxis();
         generateXAxis();
-        addLine("Mt -> U0;", 1);
-        addLine("Mt -> A0;", 1);
-        addLine("{ rank = same; Mt; A1; }", 1);
-        generateNodos();
+        //addLine("Mt -> Y1;", 1);
+        text.append("    Mt -> Y").append(matriz.getRaiz().getBelow().getDato()).append(";").append("\n");
+        //addLine("Mt -> X1;", 1);
+        text.append("    Mt -> X").append(matriz.getRaiz().getNext().getDato()).append(";").append("\n");
+        addLine(generateRankX(), 1);
+        //generateNodos();
         addLine("}", 0);
 
         return text.toString();
@@ -47,28 +49,43 @@ public class SparseMatrixGraphvizCodeGenerator extends Generator {
     }
 
     private void generateYAxis() {
-        Nodo<Integer> actual = matriz.getPrincipalNode().getBelow();
+        Nodo<Integer> currentY = matriz.getRaiz().getBelow();
 
-        while (actual != null) {
-            int y = actual.getDato();
+        while (currentY != null) {
+            int y = currentY.getDato();
             addLine("Y" + y + " [label = \"" + y + "\", width = 1.5, group = 1 ];", 1);
-            actual = actual.getBelow();
+            currentY = currentY.getBelow();
         }
     }
 
     private void generateXAxis() {
-        Nodo<Integer> actual = matriz.getPrincipalNode().getNext();
+        Nodo<Integer> currentX = matriz.getRaiz().getNext();
 
         int i = 2;
-        while (actual != null) {
-            int x = actual.getDato();
+        while (currentX != null) {
+            int x = currentX.getDato();
             addLine("X" + x + " [label = \"" + x + "\", width = 1.5, group = " + i + " ];", 1);
-            actual = actual.getNext();
+            currentX = currentX.getNext();
             i++;
         }
     }
+    
+    private String generateRankX() {
+        Nodo<Integer> currentX = matriz.getRaiz().getNext();
+        StringBuilder text = new StringBuilder();
+        text.append("{ rank = same; Mt; ");
+        
+        while (currentX != null) {
+            int x= currentX.getDato();
+            text.append(" X").append(x).append("; ");
+            currentX = currentX.getNext();
+        }
+        text.append("}");
+        
+        return text.toString();
+    }
 
-    private void generateNodos() {
+    /*private void generateNodos() {
         Nodo<Integer> currentY = matriz.getPrincipalNode().getBelow();
 
         while (currentY != null) {
@@ -108,6 +125,6 @@ public class SparseMatrixGraphvizCodeGenerator extends Generator {
             xAxis = xAxis.getNext();
         }
         return -1;
-    }
+    }*/
 
 }
