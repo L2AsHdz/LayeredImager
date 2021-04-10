@@ -22,105 +22,132 @@ public class SparseMatrix {
 
     public void add(int dato, int x, int y) {
         MatrixNode nuevo = new MatrixNode(x, y, dato);
-        Nodo<Integer> cordX;
-        Nodo<Integer> cordY;
+        Nodo<Integer> posX;
+        Nodo<Integer> posY;
 
         if (raiz.getNext() == null & raiz.getBelow() == null) {
-            cordX = new Nodo(x);
-            cordY = new Nodo(y);
-            nuevo.setAbove(cordX);
-            nuevo.setPrev(cordY);
+            posX = new Nodo(x);
+            posY = new Nodo(y);
+            nuevo.setAbove(posX);
+            nuevo.setPrev(posY);
 
-            cordX.setBelow(nuevo);
-            cordY.setNext(nuevo);
+            posX.setBelow(nuevo);
+            posY.setNext(nuevo);
 
-            raiz.setNext(cordX);
-            raiz.setBelow(cordY);
-            System.out.println("Se agregaron las coordenadas al inicio");
+            raiz.setNext(posX);
+            raiz.setBelow(posY);
         } else {
+            addCordX(x);
+            addCordY(y);
+//            addNodoToXAxis(nuevo);
+//            addNodoToYAxis(nuevo);
+        }
+    }
 
-            Nodo<Integer> tempX = raiz.getNext();
-            Nodo<Integer> tempY = raiz.getBelow();
+    private void addCordX(int x) {
+        Nodo<Integer> tempX = getNodoX(x);
+        Nodo<Integer> posX;
 
-            //Recorre las x buscando si ya existe la coordenada x
+        //Si no existe, recorre buscando la posicion donde agregarse
+        if (tempX == null) {
+            tempX = raiz.getNext();
+
             while (tempX != null) {
-                if (tempX.getDato() == x) {
+                //Si tempX es mayor agrega cordX antes de tempX
+                if (tempX.getDato() > x) {
+                    posX = new Nodo(x);
+
+                    posX.setPrev(tempX.getPrev());
+                    posX.setNext(tempX);
+
+                    if (tempX.getPrev() != null) {
+                        tempX.getPrev().setNext(posX);
+                    } else {
+                        raiz.setNext(posX);
+                    }
+
+                    tempX.setPrev(posX);
                     break;
                 }
+
+                //Si no existe siguiente agrega cordX de ultimo
+                if (tempX.getNext() == null) {
+                    posX = new Nodo(x);
+                    posX.setPrev(tempX);
+                    tempX.setNext(posX);
+                    break;
+                }
+
                 tempX = tempX.getNext();
             }
+        }
+    }
 
-            //Si no existe, recorre buscando la posicion donde agregarse
-            if (tempX == null) {
-                tempX = raiz.getNext();
-                
-                while (tempX != null) {
-                    //Si tempX es mayor agrega cordX antes de tempX
-                    if (tempX.getDato() > x) {
-                        cordX = new Nodo(x);
-                        
-                        cordX.setPrev(tempX.getPrev());
-                        cordX.setNext(tempX);
-                        
-                        if (tempX.getPrev() != null) {
-                            tempX.getPrev().setNext(cordX);
-                        } else {
-                            raiz.setNext(cordX);
-                        }
-                        
-                        tempX.setPrev(cordX);
-                        break;
-                    }
-                    
-                    //Si no existe siguiente agrega cordX de ultimo
-                    if (tempX.getNext() == null) {
-                        cordX = new Nodo(x);
-                        cordX.setPrev(tempX);
-                        tempX.setNext(cordX);
-                        break;
-                    }
-                    
-                    tempX = tempX.getNext();
-                }
-            }
+    private void addCordY(int y) {
+        Nodo<Integer> tempY = getNodoY(y);
+        Nodo<Integer> posY;
+
+        if (tempY == null) {
+            tempY = raiz.getBelow();
 
             while (tempY != null) {
-                if (tempY.getDato() == y) {
+                if (tempY.getDato() > y) {
+                    posY = new Nodo(y);
+
+                    posY.setAbove(tempY.getAbove());
+                    posY.setBelow(tempY);
+
+                    if (tempY.getAbove() != null) {
+                        tempY.getAbove().setBelow(posY);
+                    } else {
+                        raiz.setBelow(posY);
+                    }
+
+                    tempY.setAbove(posY);
                     break;
                 }
+
+                if (tempY.getBelow() == null) {
+                    posY = new Nodo(y);
+                    posY.setAbove(tempY);
+                    tempY.setBelow(posY);
+                    break;
+                }
+
                 tempY = tempY.getBelow();
             }
-            
-            if (tempY == null) {
-                tempY = raiz.getBelow();
-                
-                while (tempY != null) {
-                    if (tempY.getDato() > y) {
-                        cordY = new Nodo(y);
-                        
-                        cordY.setAbove(tempY.getAbove());
-                        cordY.setBelow(tempY);
-                        
-                        if (tempY.getAbove() != null) {
-                            tempY.getAbove().setBelow(cordY);
-                        } else {
-                            raiz.setBelow(cordY);
-                        }
-                        
-                        tempY.setAbove(cordY);
-                        break;
-                    }
-                    
-                    if (tempY.getBelow() == null) {
-                        cordY = new Nodo(y);
-                        cordY.setAbove(tempY);
-                        tempY.setBelow(cordY);
-                        break;
-                    }
-                    
-                    tempY = tempY.getBelow();
-                }
-            }
         }
+    }
+
+    private void addNodoToXAxis(MatrixNode nuevo) {
+        Nodo<Integer> tempX = getNodoX(nuevo.getX());
+        
+        if (tempX != null) {
+            
+        }
+    }
+
+    private Nodo<Integer> getNodoX(int x) {
+        Nodo<Integer> tempX = raiz.getNext();
+
+        while (tempX != null) {
+            if (tempX.getDato() == x) {
+                return tempX;
+            }
+            tempX = tempX.getNext();
+        }
+        return null;
+    }
+
+    private Nodo<Integer> getNodoY(int y) {
+        Nodo<Integer> tempY = raiz.getBelow();
+
+        while (tempY != null) {
+            if (tempY.getDato() == y) {
+                return tempY;
+            }
+            tempY = tempY.getBelow();
+        }
+        return null;
     }
 }
