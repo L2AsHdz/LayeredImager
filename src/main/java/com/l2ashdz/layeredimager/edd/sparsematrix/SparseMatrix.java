@@ -39,8 +39,8 @@ public class SparseMatrix {
         } else {
             addCordX(x);
             addCordY(y);
-//            addNodoToXAxis(nuevo);
-//            addNodoToYAxis(nuevo);
+            addNodoToXAxis(nuevo);
+            addNodoToYAxis(nuevo);
         }
     }
 
@@ -48,12 +48,10 @@ public class SparseMatrix {
         Nodo<Integer> tempX = getNodoX(x);
         Nodo<Integer> posX;
 
-        //Si no existe, recorre buscando la posicion donde agregarse
         if (tempX == null) {
             tempX = raiz.getNext();
 
             while (tempX != null) {
-                //Si tempX es mayor agrega cordX antes de tempX
                 if (tempX.getDato() > x) {
                     posX = new Nodo(x);
 
@@ -70,14 +68,12 @@ public class SparseMatrix {
                     break;
                 }
 
-                //Si no existe siguiente agrega cordX de ultimo
                 if (tempX.getNext() == null) {
                     posX = new Nodo(x);
                     posX.setPrev(tempX);
                     tempX.setNext(posX);
                     break;
                 }
-
                 tempX = tempX.getNext();
             }
         }
@@ -113,17 +109,82 @@ public class SparseMatrix {
                     tempY.setBelow(posY);
                     break;
                 }
-
                 tempY = tempY.getBelow();
             }
         }
     }
 
     private void addNodoToXAxis(MatrixNode nuevo) {
-        Nodo<Integer> tempX = getNodoX(nuevo.getX());
-        
-        if (tempX != null) {
+        Nodo<Integer> nodoX = getNodoX(nuevo.getX());
+        MatrixNode nodeTemp;
+
+        if (nodoX != null) {
+            nodeTemp = (MatrixNode) nodoX.getBelow();
+
+            if (nodeTemp == null) {
+                nuevo.setAbove(nodoX);
+                nodoX.setBelow(nuevo);
+            } else {
+                while (nodeTemp != null) {
+                    if (nodeTemp.getY() == nuevo.getY()) {
+                        nodeTemp.setDato(nuevo.getDato());
+                        break;
+                    }
+
+                    if (nodeTemp.getY() > nuevo.getY()) {
+                        nuevo.setAbove(nodeTemp.getAbove());
+                        nuevo.setBelow(nodeTemp);
+
+                        nodeTemp.getAbove().setBelow(nuevo);
+                        nodeTemp.setAbove(nuevo);
+                        break;
+                    }
+
+                    if (nodeTemp.getBelow() == null) {
+                        nuevo.setAbove(nodeTemp);
+                        nodeTemp.setBelow(nuevo);
+                        break;
+                    }
+                    nodeTemp = (MatrixNode) nodeTemp.getBelow();
+                }
+            }
+        }
+    }
+
+    private void addNodoToYAxis(MatrixNode nuevo) {
+        Nodo<Integer> nodoY = getNodoY(nuevo.getY());
+        MatrixNode nodeTemp;
+
+        if (nodoY != null) {
+            nodeTemp = (MatrixNode) nodoY.getNext();
             
+            if (nodeTemp == null) {
+                nuevo.setPrev(nodoY);
+                nodoY.setNext(nuevo);
+            } else {
+                while (nodeTemp != null) {
+                    if (nodeTemp.getX() == nuevo.getX()) {
+                        nodeTemp.setDato(nuevo.getDato());
+                        break;
+                    }
+                    
+                    if (nodeTemp.getX() > nuevo.getX()) {
+                        nuevo.setPrev(nodeTemp.getPrev());
+                        nuevo.setNext(nodeTemp);
+                        
+                        nodeTemp.getPrev().setNext(nuevo);
+                        nodeTemp.setPrev(nuevo);
+                        break;
+                    }
+                    
+                    if (nodeTemp.getNext() == null) {
+                        nuevo.setPrev(nodeTemp);
+                        nodeTemp.setNext(nuevo);
+                        break;
+                    }
+                    nodeTemp = (MatrixNode) nodeTemp.getNext();
+                }
+            }
         }
     }
 

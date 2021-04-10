@@ -28,12 +28,13 @@ public class LayeredImager {
         SparseMatrix matriz = new SparseMatrix();
         
         matriz.add(1, 3, 3);
-        matriz.add(1, 5, 5);
-        matriz.add(1, 1, 1);
-        matriz.add(1, 4, 4);
-        matriz.add(1, 2, 7);
-        matriz.add(1, 2, 9);
-        matriz.add(1, 10, 10);
+        matriz.add(2, 5, 5);
+        matriz.add(3, 1, 1);
+        matriz.add(4, 4, 4);
+        matriz.add(5, 2, 7);
+        matriz.add(6, 2, 9);
+        matriz.add(7, 10, 10);
+        matriz.add(8, 1, 7);
         var generator = new SparseMatrixGraphvizCodeGenerator(matriz); 
         
         saveFile("matriz.dot", generator.generate());
