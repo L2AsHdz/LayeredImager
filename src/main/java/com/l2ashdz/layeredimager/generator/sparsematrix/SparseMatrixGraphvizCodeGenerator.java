@@ -139,74 +139,30 @@ public class SparseMatrixGraphvizCodeGenerator extends Generator {
 
     private String genereteMatrixNodes() {
         StringBuilder nodos = new StringBuilder();
-        Nodo<Integer> nodoY = matriz.getRaiz().getBelow();
         MatrixNode currentNode;
-        while (nodoY != null) {
-            currentNode = (MatrixNode) nodoY.getNext();
+
+        for (int i = 1; i <= matriz.getSizeYAxis(); i++) {
             int g = 2;
-            for (int i = 1; i <= matriz.getSizeXAxis(); i++) {
+            for (int j = 1; j <= matriz.getSizeXAxis(); j++) {
+                currentNode = matriz.getMatrixNode(j, i);
                 if (currentNode != null) {
-                    if (currentNode.getX() == i) {
-                        String hex = Integer.toHexString(currentNode.getDato());
-                        nodos.append("X")
-                                .append(currentNode.getX())
-                                .append("_Y")
-                                .append(currentNode.getY())
-                                .append(" [label = \"")
-                                .append(hex)
-                                .append("\", width = 1.5, group = ")
-                                .append(g)
-                                .append("];\n    ");
-                        currentNode = (MatrixNode) currentNode.getNext();
-                        g++;
-                    }
+                    String hex = Integer.toHexString(currentNode.getDato());
+                    nodos.append("X")
+                            .append(currentNode.getX())
+                            .append("_Y")
+                            .append(currentNode.getY())
+                            .append(" [label = \"#")
+                            .append(hex)
+                            .append("\", width = 1.5, group = ")
+                            .append(g)
+                            .append("];\n    ");
+                }
+                if (matriz.getNodoX(j) != null) {
+                    g++;
                 }
             }
-            nodoY = nodoY.getBelow();
         }
 
         return nodos.toString();
     }
-
-    /*private void generateNodos() {
-        Nodo<Integer> currentY = matriz.getPrincipalNode().getBelow();
-
-        while (currentY != null) {
-            int y = (int) currentY.getDato();
-            
-            Nodo<Integer> currentNodo = currentY.getNext();
-            while (currentNodo != null) {
-                String hex  = Integer.toHexString(currentNodo.getDato());
-                int x = getXAxis(currentNodo);
-                addLine("X"+x+"_Y"+y+" [label = \"#"+hex+"\", width = 1.5, group = "+(x+1)+" ];", 1);
-                currentNodo = currentNodo.getNext();
-}
-            
-            currentY = currentY.getBelow();
-        }
-    }
-
-    private int getXAxis(Nodo<Integer> currentNodo) {
-        Nodo<Integer> xAxis = matriz.getPrincipalNode().getNext();
-        
-        while (xAxis != null) {
-            Nodo<Integer> nodeX = xAxis.getBelow();
-            
-            if (nodeX == currentNodo) {
-                return xAxis.getDato();
-            } else {
-                nodeX = nodeX.getBelow();
-                
-                while (nodeX != null) {
-                    if (nodeX == currentNodo) {
-                        return xAxis.getDato();
-                    }
-                    nodeX = nodeX.getBelow();
-                }
-            }
-            
-            xAxis = xAxis.getNext();
-        }
-        return -1;
-    }*/
 }

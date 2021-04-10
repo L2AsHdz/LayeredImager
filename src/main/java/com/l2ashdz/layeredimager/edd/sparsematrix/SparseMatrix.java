@@ -157,7 +157,7 @@ public class SparseMatrix {
 
         if (nodoY != null) {
             nodeTemp = (MatrixNode) nodoY.getNext();
-            
+
             if (nodeTemp == null) {
                 nuevo.setPrev(nodoY);
                 nodoY.setNext(nuevo);
@@ -167,16 +167,16 @@ public class SparseMatrix {
                         nodeTemp.setDato(nuevo.getDato());
                         break;
                     }
-                    
+
                     if (nodeTemp.getX() > nuevo.getX()) {
                         nuevo.setPrev(nodeTemp.getPrev());
                         nuevo.setNext(nodeTemp);
-                        
+
                         nodeTemp.getPrev().setNext(nuevo);
                         nodeTemp.setPrev(nuevo);
                         break;
                     }
-                    
+
                     if (nodeTemp.getNext() == null) {
                         nuevo.setPrev(nodeTemp);
                         nodeTemp.setNext(nuevo);
@@ -188,7 +188,7 @@ public class SparseMatrix {
         }
     }
 
-    private Nodo<Integer> getNodoX(int x) {
+    public Nodo<Integer> getNodoX(int x) {
         Nodo<Integer> tempX = raiz.getNext();
 
         while (tempX != null) {
@@ -200,7 +200,7 @@ public class SparseMatrix {
         return null;
     }
 
-    private Nodo<Integer> getNodoY(int y) {
+    public Nodo<Integer> getNodoY(int y) {
         Nodo<Integer> tempY = raiz.getBelow();
 
         while (tempY != null) {
@@ -211,7 +211,7 @@ public class SparseMatrix {
         }
         return null;
     }
-    
+
     public int getSizeXAxis() {
         Nodo<Integer> tempX = raiz.getNext();
         int size = 0;
@@ -219,18 +219,34 @@ public class SparseMatrix {
             size = tempX.getDato();
             tempX = tempX.getNext();
         }
-        
+
         return size;
     }
-    
+
     public int getSizeYAxis() {
         Nodo<Integer> tempY = raiz.getBelow();
         int size = 0;
         while (tempY != null) {
-            size++;
+            size = tempY.getDato();
             tempY = tempY.getBelow();
         }
-        
+
         return size;
+    }
+
+    public MatrixNode getMatrixNode(int x, int y) {
+        Nodo<Integer> tempX = getNodoX(x);
+        if (tempX != null) {
+            MatrixNode currentNode = (MatrixNode) tempX.getBelow();
+
+            while (currentNode != null) {
+                if (currentNode.getY() == y) {
+                    return currentNode;
+                }
+                currentNode = (MatrixNode) currentNode.getBelow();
+            }
+        }
+
+        return null;
     }
 }

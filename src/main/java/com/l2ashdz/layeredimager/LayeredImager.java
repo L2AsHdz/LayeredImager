@@ -27,7 +27,7 @@ public class LayeredImager {
     public static void pruebaMatriz() {
         SparseMatrix matriz = new SparseMatrix();
         
-        matriz.add(1, 3, 3);
+        matriz.add(Integer.parseInt("e74c3c", 16), 3, 3);
         matriz.add(2, 5, 5);
         matriz.add(3, 1, 1);
         matriz.add(9, 6, 1);
