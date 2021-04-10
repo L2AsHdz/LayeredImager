@@ -1,4 +1,4 @@
-package aux;
+package com.l2ashdz.layeredimager.controller;
 
 import java.io.File;
 import java.io.FileNotFoundException;
