@@ -31,6 +31,8 @@ public class LayeredImager {
         matriz.add(1, 5, 5);
         matriz.add(1, 1, 1);
         matriz.add(1, 4, 4);
+        matriz.add(1, 2, 7);
+        matriz.add(1, 2, 9);
         matriz.add(1, 10, 10);
         var generator = new SparseMatrixGraphvizCodeGenerator(matriz); 
         
