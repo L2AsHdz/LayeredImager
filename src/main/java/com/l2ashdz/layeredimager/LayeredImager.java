@@ -30,6 +30,7 @@ public class LayeredImager {
         matriz.add(1, 3, 3);
         matriz.add(2, 5, 5);
         matriz.add(3, 1, 1);
+        matriz.add(9, 6, 1);
         matriz.add(4, 4, 4);
         matriz.add(5, 2, 7);
         matriz.add(6, 2, 9);

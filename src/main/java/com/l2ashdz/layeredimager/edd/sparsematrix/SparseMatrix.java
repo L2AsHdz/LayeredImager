@@ -211,4 +211,26 @@ public class SparseMatrix {
         }
         return null;
     }
+    
+    public int getSizeXAxis() {
+        Nodo<Integer> tempX = raiz.getNext();
+        int size = 0;
+        while (tempX != null) {
+            size = tempX.getDato();
+            tempX = tempX.getNext();
+        }
+        
+        return size;
+    }
+    
+    public int getSizeYAxis() {
+        Nodo<Integer> tempY = raiz.getBelow();
+        int size = 0;
+        while (tempY != null) {
+            size++;
+            tempY = tempY.getBelow();
+        }
+        
+        return size;
+    }
 }
