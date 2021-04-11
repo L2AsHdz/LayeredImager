@@ -2,18 +2,21 @@ package com.l2ashdz.layeredimager;
 
 import com.l2ashdz.layeredimager.analizador.lexico.CapLexer;
 import com.l2ashdz.layeredimager.analizador.lexico.ImageLexer;
+import com.l2ashdz.layeredimager.analizador.lexico.UserLexer;
 import com.l2ashdz.layeredimager.analizador.sintactico.CapParser;
 import com.l2ashdz.layeredimager.analizador.sintactico.ImageParser;
+import com.l2ashdz.layeredimager.analizador.sintactico.UserParser;
 import com.l2ashdz.layeredimager.edd.list.CircularList;
 import com.l2ashdz.layeredimager.edd.list.Lista;
 import com.l2ashdz.layeredimager.edd.sparsematrix.SparseMatrix;
 import com.l2ashdz.layeredimager.edd.tree.ArbolAVL;
 import com.l2ashdz.layeredimager.generator.sparsematrix.SparseMatrixGraphvizCodeGenerator;
 import com.l2ashdz.layeredimager.model.Capa;
-import com.l2ashdz.layeredimager.model.Imagen;
-import com.l2ashdz.layeredimager.model.Usuario;
+import com.l2ashdz.layeredimager.model.image.Imagen;
+import com.l2ashdz.layeredimager.model.user.Usuario;
 import static com.l2ashdz.layeredimager.controller.FileController.saveFile;
-import com.l2ashdz.layeredimager.model.PreImagen;
+import com.l2ashdz.layeredimager.model.image.PreImagen;
+import com.l2ashdz.layeredimager.model.user.InfoUser;
 import java.io.StringReader;
 import java.util.List;
 
@@ -31,6 +34,40 @@ public class LayeredImager {
         //pruebaMatriz();
         pruebaLecturaCap();
         pruebaLecturaImage();
+        pruebaLecturaUser();
+    }
+    
+    public static void pruebaLecturaUser() {
+        String text = """
+                      userM:;
+                      userB:;
+                      userA:13,14;
+                      userY:8,9,10;
+                      """;
+        
+        StringReader reader = new StringReader(text);
+        
+        UserLexer lexer;
+        UserParser parser = null;
+        
+        try {
+            lexer = new UserLexer(reader);
+            parser = new UserParser(lexer);
+            parser.parse();
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        
+        List<InfoUser> infoUsers = parser.getInfoUsers();
+        
+        infoUsers.forEach(u -> {
+            System.out.println("User: " + u.getName());
+            System.out.print("Images: ");
+            u.getIdImages().forEach(i -> {
+                System.out.print(i + ",");
+            });
+            System.out.println("\n");
+        });
     }
     
     public static void pruebaLecturaImage() {

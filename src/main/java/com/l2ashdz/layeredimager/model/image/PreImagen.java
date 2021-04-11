@@ -1,4 +1,4 @@
-package com.l2ashdz.layeredimager.model;
+package com.l2ashdz.layeredimager.model.image;
 
 import java.util.List;
 

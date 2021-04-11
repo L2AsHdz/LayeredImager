@@ -1,0 +1,49 @@
+package com.l2ashdz.layeredimager.analizador.sintactico;
+
+import com.l2ashdz.layeredimager.model.user.InfoUser;
+import java.util.ArrayList;
+import java.util.List;
+import java_cup.runtime.Symbol;
+
+parser code {:
+
+    List<InfoUser> infoUsers = new ArrayList();
+    List<Integer> idImages = new ArrayList();
+
+    public List<InfoUser> getInfoUsers() {
+        return this.infoUsers;
+    }
+
+    public void syntax_error(Symbol s) {
+        String ss =  (String) s.value;
+        StringBuilder descripcion = new StringBuilder("Se esperaba: ");
+        expected_token_ids().forEach(x -> descripcion.append(symbl_name_from_id(x)).append(", "));
+        System.out.println(ss + " - " + descripcion);
+    }
+
+:}
+
+terminal            COMMA, SEMI, COLON;
+terminal String     ENTERO, NAME;
+
+non terminal        users, user, images;
+
+users::= user SEMI users
+       | user SEMI
+       ;
+
+user ::= NAME:n COLON images
+         {:
+            infoUsers.add(new InfoUser(n, idImages));
+            idImages = new ArrayList();
+         :}
+       | NAME:n COLON
+         {:
+            infoUsers.add(new InfoUser(n, idImages));
+            idImages = new ArrayList();
+         :}
+       ;
+
+images ::= ENTERO:i COMMA images        {:idImages.add(Integer.parseInt(i));:}
+         | ENTERO:i                     {:idImages.add(Integer.parseInt(i));:}
+         ;

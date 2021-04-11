@@ -1,7 +1,7 @@
 package com.l2ashdz.layeredimager.edd.list;
 
 import com.l2ashdz.layeredimager.edd.Nodo;
-import com.l2ashdz.layeredimager.model.Imagen;
+import com.l2ashdz.layeredimager.model.image.Imagen;
 
 /**
  *

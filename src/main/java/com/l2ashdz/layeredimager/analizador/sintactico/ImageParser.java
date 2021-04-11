@@ -5,7 +5,7 @@
 
 package com.l2ashdz.layeredimager.analizador.sintactico;
 
-import com.l2ashdz.layeredimager.model.PreImagen;
+import com.l2ashdz.layeredimager.model.image.PreImagen;
 import java.util.ArrayList;
 import java.util.List;
 import java_cup.runtime.Symbol;

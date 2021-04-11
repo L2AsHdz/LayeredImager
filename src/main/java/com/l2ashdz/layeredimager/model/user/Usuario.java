@@ -1,4 +1,6 @@
-package com.l2ashdz.layeredimager.model;
+package com.l2ashdz.layeredimager.model.user;
+
+import com.l2ashdz.layeredimager.model.Objeto;
 
 /**
  *

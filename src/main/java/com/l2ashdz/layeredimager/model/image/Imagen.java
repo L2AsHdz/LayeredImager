@@ -1,6 +1,7 @@
-package com.l2ashdz.layeredimager.model;
+package com.l2ashdz.layeredimager.model.image;
 
 import com.l2ashdz.layeredimager.edd.list.Lista;
+import com.l2ashdz.layeredimager.model.Objeto;
 
 /**
  *
