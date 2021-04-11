@@ -2,7 +2,7 @@
 
 echo Compilando Lexer...
 jflex lexer.flex
-echo ---------------------
+echo ----------------------------------------------------------------------
 
 echo Compilando Parser...
 cup -parser Parser -symbols Sym parser.cup

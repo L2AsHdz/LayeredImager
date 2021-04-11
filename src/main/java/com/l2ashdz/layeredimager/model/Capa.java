@@ -1,5 +1,7 @@
 package com.l2ashdz.layeredimager.model;
 
+import com.l2ashdz.layeredimager.edd.sparsematrix.SparseMatrix;
+
 /**
  *
  * @date 4/04/2021
@@ -8,22 +10,31 @@ package com.l2ashdz.layeredimager.model;
  */
 public class Capa extends Objeto {
 
-    private String nombre;
-    //private MatrizCapa
-
+    private String name;
+    private SparseMatrix matriz;
+    
     public Capa() {
     }
 
-    public Capa(String nombre, int id) {
+    public Capa(SparseMatrix matriz, int id) {
         super(id);
-        this.nombre = nombre;
+        this.name = "Capa_" + String.valueOf(id);
+        this.matriz = matriz;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getName() {
+        return name;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public SparseMatrix getMatriz() {
+        return matriz;
+    }
+
+    public void setMatriz(SparseMatrix matriz) {
+        this.matriz = matriz;
     }
 }

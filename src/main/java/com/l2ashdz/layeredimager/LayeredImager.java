@@ -121,9 +121,9 @@ public class LayeredImager {
     }
 
     private static void pruebaListaCapas() {
-        Capa cap1 = new Capa("capa1", 1);
-        Capa cap2 = new Capa("capa2", 2);
-        Capa cap3 = new Capa("capa3", 3);
+        Capa cap1 = new Capa();
+        Capa cap2 = new Capa();
+        Capa cap3 = new Capa();
 
         List capList = new List();
 
