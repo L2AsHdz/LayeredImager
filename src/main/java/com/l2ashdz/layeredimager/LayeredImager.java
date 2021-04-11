@@ -1,5 +1,7 @@
 package com.l2ashdz.layeredimager;
 
+import com.l2ashdz.layeredimager.analizador.lexico.Lexer;
+import com.l2ashdz.layeredimager.analizador.sintactico.Parser;
 import com.l2ashdz.layeredimager.edd.list.CircularList;
 import com.l2ashdz.layeredimager.edd.list.List;
 import com.l2ashdz.layeredimager.edd.sparsematrix.SparseMatrix;
@@ -9,6 +11,7 @@ import com.l2ashdz.layeredimager.model.Capa;
 import com.l2ashdz.layeredimager.model.Imagen;
 import com.l2ashdz.layeredimager.model.Usuario;
 import static com.l2ashdz.layeredimager.controller.FileController.saveFile;
+import java.io.StringReader;
 
 /**
  *
@@ -21,7 +24,52 @@ public class LayeredImager {
     public static void main(String[] args) {
         //pruebaListaIamgen();
         //pruebaArbolAVL();
-        pruebaMatriz();
+        //pruebaMatriz();
+        pruebaLectura();
+    }
+    
+    public static void pruebaLectura(){
+        String text = """
+                      1{
+                        4,9,#3498DB;
+                        1,1,#28B463;
+                        2,4,#F4D03F;
+                      }
+                      
+                      2{
+                        2,9,#3498DB;
+                        1,1,#28B463;
+                      }
+                      
+                      3{
+                        4,7,#3498DB;
+                        1,10,#28B463;
+                        2,6,#F4D03F;
+                      }
+                      """;
+        StringReader reader = new StringReader(text);
+        
+        Lexer lexer;
+        Parser parser = null;
+        
+        try {
+            lexer = new Lexer(reader);
+            parser = new Parser(lexer);
+            parser.parse();
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        ArbolAVL arbol = parser.getCapas();
+        arbol.inOrden(arbol.getRaiz());
+        System.out.println();
+        Capa cap = (Capa) arbol.get(1);
+        System.out.println(cap.getName());
+        
+        SparseMatrix matriz = cap.getMatriz();
+        
+        var generator = new SparseMatrixGraphvizCodeGenerator(matriz);
+
+        saveFile("matrizCapa.dot", generator.generate());
     }
 
     public static void pruebaMatriz() {

@@ -18,14 +18,14 @@ parser code {:
         String ss =  (String) s.value;
         StringBuilder descripcion = new StringBuilder("Se esperaba: ");
         expected_token_ids().forEach(x -> descripcion.append(symbl_name_from_id(x)).append(", "));
-        System.out.println(ss);
+        System.out.println(ss + " - " + descripcion);
     }
 
 :}
 
 terminal            OPEN_BRACE, CLOSE_BRACE, COMMA, SEMI, COLON;
 terminal String     COLOR, NAME;
-terminal Integer    ENTERO;
+terminal String     ENTERO;
 
 non terminal        inicio, capas, images, users;
 non terminal        capa, nodos, infoNodo;
@@ -42,18 +42,18 @@ capas ::= capa CLOSE_BRACE capas
 
 capa ::= ENTERO:id OPEN_BRACE nodos
         {:
-            capas.add(new Capa(matriz, id));
+            capas.add(new Capa(matriz, Integer.parseInt(id)));
             matriz = new SparseMatrix();
         :}
         ;
 
 nodos ::= infoNodo SEMI nodos
-        | infoNodo
+        | infoNodo SEMI
         ;
 
 infoNodo ::= ENTERO:x COMMA ENTERO:y COMMA COLOR:c
            {:
                 String color = c.replace("#", "");
-                matriz.add(Integer.parseInt(color, 16), x, y);
+                matriz.add(Integer.parseInt(color, 16), Integer.parseInt(x), Integer.parseInt(y));
            :}
            ;

@@ -24,7 +24,7 @@ import static com.l2ashdz.layeredimager.analizador.sintactico.Sym.*;
     return new Symbol(EOF, "Fin de linea");
 %eofval}
 
-ENTERO = "\""(0|([1-9][0-9]*))"\""
+ENTERO = (0|([1-9][0-9]*))
 COLOR = #([a-fA-F0-9]{6}|[a-fA-F0-9]{3})
 NAME = \w(\w|\d)*
 %%

@@ -36,7 +36,7 @@ public class Parser extends java_cup.runtime.lr_parser {
     unpackFromStrings(new String[] {
     "\000\012\000\002\002\003\000\002\002\004\000\002\002" +
     "\003\000\002\002\003\000\002\003\005\000\002\003\004" +
-    "\000\002\006\005\000\002\007\005\000\002\007\003\000" +
+    "\000\002\006\005\000\002\007\005\000\002\007\004\000" +
     "\002\010\007" });
 
   /** Access to production table. */
@@ -49,12 +49,12 @@ public class Parser extends java_cup.runtime.lr_parser {
     "\002\000\004\005\025\001\002\000\004\002\001\001\002" +
     "\000\004\002\ufffe\001\002\000\004\004\013\001\002\000" +
     "\004\002\012\001\002\000\004\002\000\001\002\000\004" +
-    "\013\016\001\002\000\004\005\ufffb\001\002\000\006\005" +
-    "\ufff9\007\023\001\002\000\004\006\017\001\002\000\004" +
-    "\013\020\001\002\000\004\006\021\001\002\000\004\011" +
-    "\022\001\002\000\006\005\ufff8\007\ufff8\001\002\000\004" +
-    "\013\016\001\002\000\004\005\ufffa\001\002\000\006\002" +
-    "\ufffc\013\010\001\002\000\004\002\ufffd\001\002" });
+    "\013\016\001\002\000\004\005\ufffb\001\002\000\004\007" +
+    "\023\001\002\000\004\006\017\001\002\000\004\013\020" +
+    "\001\002\000\004\006\021\001\002\000\004\011\022\001" +
+    "\002\000\004\007\ufff8\001\002\000\006\005\ufff9\013\016" +
+    "\001\002\000\004\005\ufffa\001\002\000\006\002\ufffc\013" +
+    "\010\001\002\000\004\002\ufffd\001\002" });
 
   /** Access to parse-action table. */
   public short[][] action_table() {return _action_table;}
@@ -121,7 +121,7 @@ public class Parser extends java_cup.runtime.lr_parser {
         String ss =  (String) s.value;
         StringBuilder descripcion = new StringBuilder("Se esperaba: ");
         expected_token_ids().forEach(x -> descripcion.append(symbl_name_from_id(x)).append(", "));
-        System.out.println(ss);
+        System.out.println(ss + " - " + descripcion);
     }
 
 
@@ -215,9 +215,9 @@ class CUP$Parser$actions {
               Object RESULT =null;
 		int idleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).left;
 		int idright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).right;
-		Integer id = (Integer)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-2)).value;
+		String id = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-2)).value;
 		
-            capas.add(new Capa(matriz, id));
+            capas.add(new Capa(matriz, Integer.parseInt(id)));
             matriz = new SparseMatrix();
         
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("capa",4, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
@@ -234,11 +234,11 @@ class CUP$Parser$actions {
           return CUP$Parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 8: // nodos ::= infoNodo 
+          case 8: // nodos ::= infoNodo SEMI 
             {
               Object RESULT =null;
 
-              CUP$Parser$result = parser.getSymbolFactory().newSymbol("nodos",5, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("nodos",5, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
 
@@ -248,16 +248,16 @@ class CUP$Parser$actions {
               Object RESULT =null;
 		int xleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-4)).left;
 		int xright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-4)).right;
-		Integer x = (Integer)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-4)).value;
+		String x = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-4)).value;
 		int yleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).left;
 		int yright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).right;
-		Integer y = (Integer)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-2)).value;
+		String y = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-2)).value;
 		int cleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
 		int cright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		String c = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
 		
                 String color = c.replace("#", "");
-                matriz.add(Integer.parseInt(color, 16), x, y);
+                matriz.add(Integer.parseInt(color, 16), Integer.parseInt(x), Integer.parseInt(y));
            
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("infoNodo",6, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-4)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
