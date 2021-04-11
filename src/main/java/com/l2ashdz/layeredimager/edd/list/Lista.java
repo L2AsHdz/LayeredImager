@@ -9,12 +9,12 @@ import com.l2ashdz.layeredimager.model.Objeto;
  * @time 13:27:55
  * @author asael
  */
-public class List {
+public class Lista {
     
     protected Nodo<Objeto> inicio;
     protected int size;
 
-    public List() {
+    public Lista() {
         this.size = 0;
     }
     

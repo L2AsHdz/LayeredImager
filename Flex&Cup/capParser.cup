@@ -3,6 +3,9 @@ package com.l2ashdz.layeredimager.analizador.sintactico;
 import com.l2ashdz.layeredimager.edd.sparsematrix.SparseMatrix;
 import com.l2ashdz.layeredimager.edd.tree.ArbolAVL;
 import com.l2ashdz.layeredimager.model.Capa;
+import com.l2ashdz.layeredimager.model.PreImagen;
+import java.util.ArrayList;
+import java.util.List;
 import java_cup.runtime.Symbol;
 
 parser code {:
@@ -23,18 +26,10 @@ parser code {:
 
 :}
 
-terminal            OPEN_BRACE, CLOSE_BRACE, COMMA, SEMI, COLON;
-terminal String     COLOR, NAME;
-terminal String     ENTERO;
+terminal            OPEN_BRACE, CLOSE_BRACE, COMMA, SEMI;
+terminal String     COLOR, ENTERO;
 
-non terminal        inicio, capas, images, users;
-non terminal        capa, nodos, infoNodo;
-
-
-inicio ::= capas
-         | images
-         | users
-         ;
+non terminal        capas, capa, nodos, infoNodo;
 
 capas ::= capa CLOSE_BRACE capas
         | capa CLOSE_BRACE

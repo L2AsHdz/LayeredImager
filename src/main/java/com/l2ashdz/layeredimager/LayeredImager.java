@@ -1,9 +1,9 @@
 package com.l2ashdz.layeredimager;
 
-import com.l2ashdz.layeredimager.analizador.lexico.Lexer;
-import com.l2ashdz.layeredimager.analizador.sintactico.Parser;
+import com.l2ashdz.layeredimager.analizador.lexico.CapLexer;
+import com.l2ashdz.layeredimager.analizador.sintactico.CapParser;
 import com.l2ashdz.layeredimager.edd.list.CircularList;
-import com.l2ashdz.layeredimager.edd.list.List;
+import com.l2ashdz.layeredimager.edd.list.Lista;
 import com.l2ashdz.layeredimager.edd.sparsematrix.SparseMatrix;
 import com.l2ashdz.layeredimager.edd.tree.ArbolAVL;
 import com.l2ashdz.layeredimager.generator.sparsematrix.SparseMatrixGraphvizCodeGenerator;
@@ -11,7 +11,9 @@ import com.l2ashdz.layeredimager.model.Capa;
 import com.l2ashdz.layeredimager.model.Imagen;
 import com.l2ashdz.layeredimager.model.Usuario;
 import static com.l2ashdz.layeredimager.controller.FileController.saveFile;
+import com.l2ashdz.layeredimager.model.PreImagen;
 import java.io.StringReader;
+import java.util.List;
 
 /**
  *
@@ -25,10 +27,43 @@ public class LayeredImager {
         //pruebaListaIamgen();
         //pruebaArbolAVL();
         //pruebaMatriz();
-        pruebaLectura();
+        pruebaLecturaCap();
     }
     
-    public static void pruebaLectura(){
+    public static void pruebaLecturaImage() {
+        String text = """
+                      5{1,5,9,4}
+                      1{6}
+                      11{}
+                      3{1,2}
+                      """;
+        
+        StringReader reader = new StringReader(text);
+        
+        /*Lexer lexer;
+        Parser parser = null;
+        
+        try {
+            lexer = new Lexer(reader);
+            parser = new Parser(lexer);
+            parser.parse();
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        
+        List<PreImagen> preImagenes = parser.getPreImagenes();
+        
+        preImagenes.forEach(pi ->{
+            System.out.println("Imagen: " + pi.getId());
+            System.out.print("Capas: ");
+            pi.getCapas().forEach(c -> {
+                System.out.print(c + ",");
+            });
+            System.out.println("\n");
+        });*/
+    }
+    
+    public static void pruebaLecturaCap(){
         String text = """
                       1{
                         4,9,#3498DB;
@@ -49,12 +84,12 @@ public class LayeredImager {
                       """;
         StringReader reader = new StringReader(text);
         
-        Lexer lexer;
-        Parser parser = null;
+        CapLexer lexer;
+        CapParser parser = null;
         
         try {
-            lexer = new Lexer(reader);
-            parser = new Parser(lexer);
+            lexer = new CapLexer(reader);
+            parser = new CapParser(lexer);
             parser.parse();
         } catch (Exception e) {
             e.printStackTrace(System.out);
@@ -65,11 +100,6 @@ public class LayeredImager {
         Capa cap = (Capa) arbol.get(1);
         System.out.println(cap.getName());
         
-        SparseMatrix matriz = cap.getMatriz();
-        
-        var generator = new SparseMatrixGraphvizCodeGenerator(matriz);
-
-        saveFile("matrizCapa.dot", generator.generate());
     }
 
     public static void pruebaMatriz() {
@@ -157,7 +187,7 @@ public class LayeredImager {
         Usuario user4 = new Usuario(4, "nombre4");
         Usuario user5 = new Usuario(5, "nombre5");
 
-        List userList = new List();
+        Lista userList = new Lista();
 
         userList.add(user1);
         userList.add(user2);
@@ -173,7 +203,7 @@ public class LayeredImager {
         Capa cap2 = new Capa();
         Capa cap3 = new Capa();
 
-        List capList = new List();
+        Lista capList = new Lista();
 
         capList.add(cap1);
         capList.add(cap2);
@@ -186,10 +216,10 @@ public class LayeredImager {
     }
 
     private static void pruebaListaIamgen() {
-        Imagen img1 = new Imagen("img1", 1);
-        Imagen img2 = new Imagen("img2", 2);
-        Imagen img3 = new Imagen("img3", 3);
-        Imagen img4 = new Imagen("img4", 4);
+        Imagen img1 = new Imagen(1);
+        Imagen img2 = new Imagen(2);
+        Imagen img3 = new Imagen(3);
+        Imagen img4 = new Imagen(4);
 
         CircularList imgList = new CircularList();
 
