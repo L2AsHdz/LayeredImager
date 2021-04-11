@@ -1,7 +1,9 @@
 package com.l2ashdz.layeredimager;
 
 import com.l2ashdz.layeredimager.analizador.lexico.CapLexer;
+import com.l2ashdz.layeredimager.analizador.lexico.ImageLexer;
 import com.l2ashdz.layeredimager.analizador.sintactico.CapParser;
+import com.l2ashdz.layeredimager.analizador.sintactico.ImageParser;
 import com.l2ashdz.layeredimager.edd.list.CircularList;
 import com.l2ashdz.layeredimager.edd.list.Lista;
 import com.l2ashdz.layeredimager.edd.sparsematrix.SparseMatrix;
@@ -28,6 +30,7 @@ public class LayeredImager {
         //pruebaArbolAVL();
         //pruebaMatriz();
         pruebaLecturaCap();
+        pruebaLecturaImage();
     }
     
     public static void pruebaLecturaImage() {
@@ -36,16 +39,18 @@ public class LayeredImager {
                       1{6}
                       11{}
                       3{1,2}
+                      3{1,2,6,7}
+                      3{1,2,7,4,66,51,2}
                       """;
         
         StringReader reader = new StringReader(text);
         
-        /*Lexer lexer;
-        Parser parser = null;
+        ImageLexer lexer;
+        ImageParser parser = null;
         
         try {
-            lexer = new Lexer(reader);
-            parser = new Parser(lexer);
+            lexer = new ImageLexer(reader);
+            parser = new ImageParser(lexer);
             parser.parse();
         } catch (Exception e) {
             e.printStackTrace(System.out);
@@ -60,7 +65,7 @@ public class LayeredImager {
                 System.out.print(c + ",");
             });
             System.out.println("\n");
-        });*/
+        });
     }
     
     public static void pruebaLecturaCap(){
@@ -81,6 +86,16 @@ public class LayeredImager {
                         1,10,#28B463;
                         2,6,#F4D03F;
                       }
+                      
+                      6{
+                        4,7,#3498DB;
+                        1,10,#28B463;
+                        2,6,#F4D03F;
+                        4,6,#F4D03F;
+                        6,1,#F4D03F;
+                        1,6,#F4D03F;
+                        3,6,#F4D03F;
+                      }
                       """;
         StringReader reader = new StringReader(text);
         
@@ -98,7 +113,7 @@ public class LayeredImager {
         arbol.inOrden(arbol.getRaiz());
         System.out.println();
         Capa cap = (Capa) arbol.get(1);
-        System.out.println(cap.getName());
+        System.out.println(cap.getName() + "\n");
         
     }
 

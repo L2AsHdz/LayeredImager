@@ -1,8 +1,5 @@
 package com.l2ashdz.layeredimager.analizador.sintactico;
 
-import com.l2ashdz.layeredimager.edd.sparsematrix.SparseMatrix;
-import com.l2ashdz.layeredimager.edd.tree.ArbolAVL;
-import com.l2ashdz.layeredimager.model.Capa;
 import com.l2ashdz.layeredimager.model.PreImagen;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,18 +7,11 @@ import java_cup.runtime.Symbol;
 
 parser code {:
 
-    SparseMatrix matriz = new SparseMatrix();
-    ArbolAVL capas = new ArbolAVL();
-
     List<PreImagen> preImagenes = new ArrayList();
     List<Integer> capasImage = new ArrayList();
 
     public List<PreImagen> getPreImagenes() {
         return this.preImagenes;
-    }
-
-    public ArbolAVL getCapas() {
-        return this.capas;
     }
 
     public void syntax_error(Symbol s) {
@@ -33,41 +23,10 @@ parser code {:
 
 :}
 
-terminal            OPEN_BRACE, CLOSE_BRACE, COMMA, SEMI, COLON;
-terminal String     COLOR, NAME;
+terminal            OPEN_BRACE, CLOSE_BRACE, COMMA;
 terminal String     ENTERO;
 
-non terminal        inicio, capas, images, users;
-non terminal        capa, nodos, infoNodo;
-non terminal        image, idCapas;
-
-
-inicio ::= capas
-         | images
-         | users
-         ;
-
-capas ::= capa CLOSE_BRACE capas
-        | capa CLOSE_BRACE
-        ;
-
-capa ::= ENTERO:id OPEN_BRACE nodos
-        {:
-            capas.add(new Capa(matriz, Integer.parseInt(id)));
-            matriz = new SparseMatrix();
-        :}
-        ;
-
-nodos ::= infoNodo SEMI nodos
-        | infoNodo SEMI
-        ;
-
-infoNodo ::= ENTERO:x COMMA ENTERO:y COMMA COLOR:c
-           {:
-                String color = c.replace("#", "");
-                matriz.add(Integer.parseInt(color, 16), Integer.parseInt(x), Integer.parseInt(y));
-           :}
-           ;
+non terminal        images, image, idCapas;
 
 images ::= image CLOSE_BRACE images
          | image CLOSE_BRACE

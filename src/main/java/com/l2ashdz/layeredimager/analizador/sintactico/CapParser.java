@@ -8,9 +8,6 @@ package com.l2ashdz.layeredimager.analizador.sintactico;
 import com.l2ashdz.layeredimager.edd.sparsematrix.SparseMatrix;
 import com.l2ashdz.layeredimager.edd.tree.ArbolAVL;
 import com.l2ashdz.layeredimager.model.Capa;
-import com.l2ashdz.layeredimager.model.PreImagen;
-import java.util.ArrayList;
-import java.util.List;
 import java_cup.runtime.Symbol;
 import java_cup.runtime.XMLElement;
 
