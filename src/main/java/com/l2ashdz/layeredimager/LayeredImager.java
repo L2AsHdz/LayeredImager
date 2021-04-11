@@ -15,8 +15,10 @@ import com.l2ashdz.layeredimager.model.Capa;
 import com.l2ashdz.layeredimager.model.image.Imagen;
 import com.l2ashdz.layeredimager.model.user.Usuario;
 import static com.l2ashdz.layeredimager.controller.FileController.saveFile;
+import com.l2ashdz.layeredimager.controller.principalui.PrincipalUIController;
 import com.l2ashdz.layeredimager.model.image.PreImagen;
 import com.l2ashdz.layeredimager.model.user.InfoUser;
+import com.l2ashdz.layeredimager.view.PrincipalView;
 import java.io.StringReader;
 import java.util.List;
 
@@ -29,12 +31,9 @@ import java.util.List;
 public class LayeredImager {
 
     public static void main(String[] args) {
-        //pruebaListaIamgen();
-        //pruebaArbolAVL();
-        //pruebaMatriz();
-        pruebaLecturaCap();
-        pruebaLecturaImage();
-        pruebaLecturaUser();
+        PrincipalView view = new PrincipalView();
+        PrincipalUIController controller = new PrincipalUIController(view);
+        controller.iniciar();
     }
     
     public static void pruebaLecturaUser() {
