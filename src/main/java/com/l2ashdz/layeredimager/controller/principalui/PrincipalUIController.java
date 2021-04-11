@@ -59,7 +59,7 @@ public class PrincipalUIController implements ActionListener {
         if (e.getSource() == view.getItmCargaCaps()) {
             capasC.iniciar(view.getPnlDesk());
         } else if (e.getSource() == view.getItmCargaImages()) {
-            capas = capasC.getCapas();
+            imagesC.setCapas(capasC.getCapas());
             imagesC.iniciar(view.getPnlDesk());
         } else if (e.getSource() == view.getItmCargaUsers()) {
             

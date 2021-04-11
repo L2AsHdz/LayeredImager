@@ -18,7 +18,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */
 public class CargaCapasController implements ActionListener {
 
-    private CargaFileView capasV;
+    private final CargaFileView capasV;
     private ArbolAVL capas;
 
     public CargaCapasController(CargaFileView capasV) {
@@ -74,7 +74,7 @@ public class CargaCapasController implements ActionListener {
         LayerFileAnalyzer analizer = new LayerFileAnalyzer();
         analizer.analyze(text);
         capas = analizer.getCapas();
-        capasV.getTxtAreaInfo().setText("Capas cargadas exitosamente!");
+        capasV.getTxtAreaInfo().setText("Capas cargadas al sistema exitosamente!");
     }
 
     public ArbolAVL getCapas() {

@@ -1,9 +1,13 @@
 package com.l2ashdz.layeredimager.controller.cargadatos;
 
+import com.l2ashdz.layeredimager.analyzer.ImageFileAnalyzer;
 import static com.l2ashdz.layeredimager.controller.FileController.readFile;
+import com.l2ashdz.layeredimager.edd.tree.ArbolAVL;
+import com.l2ashdz.layeredimager.model.image.PreImagen;
 import com.l2ashdz.layeredimager.view.cargadatos.CargaFileView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -16,7 +20,9 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */
 public class CargaImagesController implements ActionListener {
 
-    private CargaFileView imagesV;
+    private final CargaFileView imagesV;
+    private ArbolAVL capas;
+    private List<PreImagen> preImagenes;
 
     public CargaImagesController(CargaFileView imagesV) {
         this.imagesV = imagesV;
@@ -29,7 +35,7 @@ public class CargaImagesController implements ActionListener {
         parent.removeAll();
         parent.repaint();
         imagesV.setSize(parent.getSize());
-        imagesV.getBtnBuscar().setText("Cargar imagenes");
+        imagesV.getBtnCargar().setText("Cargar imagenes");
         imagesV.setVisible(true);
         parent.add(imagesV);
         parent.validate();
@@ -68,6 +74,17 @@ public class CargaImagesController implements ActionListener {
     }
 
     private void cargarDatos(String text) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ImageFileAnalyzer analyzer = new ImageFileAnalyzer();
+        analyzer.analyze(text);
+        preImagenes = analyzer.getPreImagenes();
+        imagesV.getTxtAreaInfo().setText("Imagenes cargadas al sistema exitosamente!");
+    }
+
+    public void setCapas(ArbolAVL capas) {
+        this.capas = capas;
+    }
+
+    public List<PreImagen> getPreImagenes() {
+        return preImagenes;
     }
 }
