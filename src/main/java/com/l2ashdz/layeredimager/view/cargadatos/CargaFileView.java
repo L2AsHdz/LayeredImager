@@ -13,12 +13,12 @@ import javax.swing.JTextArea;
  *
  * @author asael
  */
-public class CargaCapasView extends javax.swing.JPanel {
+public class CargaFileView extends javax.swing.JPanel {
 
     /**
      * Creates new form CargaCapasView
      */
-    public CargaCapasView() {
+    public CargaFileView() {
         initComponents();
     }
 
@@ -37,8 +37,6 @@ public class CargaCapasView extends javax.swing.JPanel {
         btnBuscar = new javax.swing.JButton();
         btnCargar = new javax.swing.JButton();
 
-        setEnabled(false);
-
         txtAreaInfo.setEditable(false);
         txtAreaInfo.setColumns(20);
         txtAreaInfo.setRows(5);
@@ -49,7 +47,7 @@ public class CargaCapasView extends javax.swing.JPanel {
 
         btnBuscar.setText("Buscar archivo");
 
-        btnCargar.setText("Cargar capas");
+        btnCargar.setText("Cargar");
         btnCargar.setEnabled(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -67,7 +65,7 @@ public class CargaCapasView extends javax.swing.JPanel {
                                 .addComponent(btnBuscar)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnCargar)))
-                        .addGap(0, 328, Short.MAX_VALUE)))
+                        .addGap(0, 366, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -108,5 +106,11 @@ public class CargaCapasView extends javax.swing.JPanel {
 
     public JLabel getLblNameFile() {
         return lblNameFile;
+    }
+
+    public void limpiarCampos() {
+        txtAreaInfo.setText("");
+        lblNameFile.setText("*No se ha escogido un archivo*");
+        btnCargar.setEnabled(false);
     }
 }

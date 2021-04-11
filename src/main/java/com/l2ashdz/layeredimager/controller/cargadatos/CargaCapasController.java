@@ -1,10 +1,9 @@
 package com.l2ashdz.layeredimager.controller.cargadatos;
 
-import com.l2ashdz.layeredimager.analyzer.Analyzer;
 import com.l2ashdz.layeredimager.analyzer.LayerFileAnalyzer;
 import static com.l2ashdz.layeredimager.controller.FileController.readFile;
 import com.l2ashdz.layeredimager.edd.tree.ArbolAVL;
-import com.l2ashdz.layeredimager.view.cargadatos.CargaCapasView;
+import com.l2ashdz.layeredimager.view.cargadatos.CargaFileView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFileChooser;
@@ -19,26 +18,25 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */
 public class CargaCapasController implements ActionListener {
 
-    private CargaCapasView capasV; 
+    private CargaFileView capasV;
     private ArbolAVL capas;
 
-    public CargaCapasController(CargaCapasView capasV) {
+    public CargaCapasController(CargaFileView capasV) {
         this.capasV = capasV;
-        
+
         this.capasV.getBtnBuscar().addActionListener(this);
         this.capasV.getBtnCargar().addActionListener(this);
     }
-    
+
     public void iniciar(JPanel parent) {
-        if (!capasV.isEnabled()) {
-            parent.removeAll();
-            parent.repaint();
-            capasV.setSize(parent.getSize());
-            capasV.setEnabled(true);
-            capasV.setVisible(true);
-            parent.add(capasV);
-            parent.validate();
-        }
+        parent.removeAll();
+        parent.repaint();
+        capasV.setSize(parent.getSize());
+        capasV.getBtnCargar().setText("Cargar capas");
+        capasV.setVisible(true);
+        parent.add(capasV);
+        parent.validate();
+        capasV.limpiarCampos();
     }
 
     @Override
@@ -46,7 +44,6 @@ public class CargaCapasController implements ActionListener {
         if (e.getSource() == capasV.getBtnBuscar()) {
             String content = buscarArchivo();
             if (!content.isEmpty()) {
-                //analizar
                 capasV.getTxtAreaInfo().setText(content);
                 capasV.getBtnCargar().setEnabled(true);
             }
@@ -79,7 +76,7 @@ public class CargaCapasController implements ActionListener {
         capas = analizer.getCapas();
         capasV.getTxtAreaInfo().setText("Capas cargadas exitosamente!");
     }
-    
+
     public ArbolAVL getCapas() {
         return this.capas;
     }
