@@ -9,6 +9,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import layeredimager.edd.sparsematrix.SparseMatrix;
+import layeredimager.model.cap.Capa;
 
 /**
  *
@@ -19,7 +21,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class CargaCapasController implements ActionListener {
 
     private final CargaFileView capasV;
-    private ArbolAVL capas;
+    private ArbolAVL capas = new ArbolAVL();
 
     public CargaCapasController(CargaFileView capasV) {
         this.capasV = capasV;
@@ -71,10 +73,18 @@ public class CargaCapasController implements ActionListener {
     }
 
     private void cargarCapas(String text) {
+        StringBuilder texto = new StringBuilder();
         LayerFileAnalyzer analizer = new LayerFileAnalyzer();
         analizer.analyze(text);
-        /*capas = analizer.getCapas();
-        capasV.getTxtAreaInfo().setText("Capas cargadas al sistema exitosamente!");*/
+        analizer.getInfoCaps().forEach(c -> {
+            SparseMatrix matriz = new SparseMatrix();
+            c.getInfoNodos().forEach(n -> {
+                matriz.add(n.getColor(), n.getX(), n.getY());
+            });
+            capas.add(new Capa(matriz, c.getId()));
+            texto.append("Capa ").append(c.getId()).append("ingresada al sistema").append("\n");
+        });
+        capasV.getTxtAreaInfo().setText(texto.toString());
     }
 
     public ArbolAVL getCapas() {

@@ -2,8 +2,9 @@ package layeredimager.analyzer;
 
 import layeredimager.analizador.lexico.CapLexer;
 import layeredimager.analizador.sintactico.CapParser;
-import layeredimager.edd.tree.ArbolAVL;
 import java.io.StringReader;
+import java.util.List;
+import layeredimager.model.cap.InfoCap;
 
 /**
  *
@@ -26,6 +27,10 @@ public class LayerFileAnalyzer implements Analyzer {
             parser.parse();
         } catch (Exception e) {
         }
+    }
+    
+    public List<InfoCap> getInfoCaps() {
+        return parser.getInfoCapas();
     }
 
 }
