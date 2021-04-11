@@ -28,9 +28,11 @@ public class SparseMatrixGraphvizCodeGenerator extends Generator {
         generateYPointers();
         generateXAxis();
         generateXPointers();
-        addLine(generateInitPunters(), 1);
+        addLine(generateInitPointers(), 1);
         addLine(generateRankX(), 1);
-        addLine(genereteMatrixNodes(), 1);
+        genereteMatrixNodes();
+        generetePoinsters();
+        generateRanks();
         addLine("}", 0);
 
         return text.toString();
@@ -104,7 +106,7 @@ public class SparseMatrixGraphvizCodeGenerator extends Generator {
         }
     }
 
-    private String generateInitPunters() {
+    private String generateInitPointers() {
         StringBuilder punteros = new StringBuilder();
         if (matriz.getRaiz().getBelow() != null) {
             punteros.append("Mt -> Y")
@@ -137,8 +139,8 @@ public class SparseMatrixGraphvizCodeGenerator extends Generator {
         return texto.toString();
     }
 
-    private String genereteMatrixNodes() {
-        StringBuilder nodos = new StringBuilder();
+    private void genereteMatrixNodes() {
+        StringBuilder nodos;
         MatrixNode currentNode;
 
         for (int i = 1; i <= matriz.getSizeYAxis(); i++) {
@@ -146,23 +148,101 @@ public class SparseMatrixGraphvizCodeGenerator extends Generator {
             for (int j = 1; j <= matriz.getSizeXAxis(); j++) {
                 currentNode = matriz.getMatrixNode(j, i);
                 if (currentNode != null) {
+                    nodos = new StringBuilder();
                     String hex = Integer.toHexString(currentNode.getDato());
-                    nodos.append("X")
-                            .append(currentNode.getX())
-                            .append("_Y")
+                    nodos.append(currentNode.getX())
                             .append(currentNode.getY())
                             .append(" [label = \"#")
                             .append(hex)
                             .append("\", width = 1.5, group = ")
                             .append(g)
-                            .append("];\n    ");
+                            .append("];");
+                    addLine(nodos.toString(), 1);
                 }
                 if (matriz.getNodoX(j) != null) {
                     g++;
                 }
             }
+            addLine("", 0);
         }
 
-        return nodos.toString();
+    }
+
+    private void generetePoinsters() {
+        StringBuilder pointers;
+        Nodo<Integer> nodoY = matriz.getRaiz().getBelow();
+        MatrixNode currentNode;
+
+        while (nodoY != null) {
+            pointers = new StringBuilder();
+            currentNode = (MatrixNode) nodoY.getNext();
+            int y = nodoY.getDato();
+            int x = currentNode.getX();
+            pointers.append("Y").append(y).append(" -> ").append(x).append(y).append(";");
+
+            while (currentNode != null) {
+                int xCurrent = currentNode.getX();
+
+                int xNext = 0;
+                if (currentNode.getNext() != null) {
+                    xNext = ((MatrixNode) currentNode.getNext()).getX();
+                }
+
+                int yBelow = 0;
+                if (currentNode.getBelow() != null) {
+                    yBelow = ((MatrixNode) currentNode.getBelow()).getY();
+                }
+                int xPrev;
+                int yAbove;
+
+                if (currentNode.getPrev() instanceof MatrixNode n) {
+                    xPrev = n.getX();
+                    pointers.append("\n    ").append(xCurrent).append(y).append(" -> ").append(xPrev).append(y);
+                } else {
+                    pointers.append("\n    ").append(xCurrent).append(y).append(" -> ").append("Y").append(y);
+                }
+
+                if (currentNode.getAbove() instanceof MatrixNode n) {
+                    yAbove = n.getY();
+                    pointers.append("\n    ").append(xCurrent).append(y).append(" -> ").append(xCurrent).append(yAbove);
+                } else {
+                    pointers.append("\n    ").append("X").append(xCurrent).append(" -> ").append(xCurrent).append(y).append(";");
+                    pointers.append("\n    ").append(xCurrent).append(y).append(" -> ").append("X").append(xCurrent);
+                }
+
+                if (xNext != 0) {
+                    pointers.append("\n    ").append(xCurrent).append(y).append(" -> ").append(xNext).append(y);
+                }
+                if (yBelow != 0) {
+                    pointers.append("\n    ").append(xCurrent).append(y).append(" -> ").append(xCurrent).append(yBelow);
+                }
+
+                currentNode = (MatrixNode) currentNode.getNext();
+            }
+            pointers.append("\n");
+            addLine(pointers.toString(), 1);
+            nodoY = nodoY.getBelow();
+        }
+    }
+
+    private void generateRanks() {
+        Nodo<Integer> nodoY = matriz.getRaiz().getBelow();
+        MatrixNode currentNode;
+        StringBuilder texto;
+
+        while (nodoY != null) {
+            texto = new StringBuilder();
+            currentNode = (MatrixNode) nodoY.getNext();
+            texto.append("{ rank = same; Y").append(nodoY.getDato()).append("; ");
+            while (currentNode != null) {
+                int x = currentNode.getX();
+                int y = currentNode.getY();
+                texto.append(x).append(y).append("; ");
+                currentNode = (MatrixNode) currentNode.getNext();
+            }
+            texto.append("}");
+            addLine(texto.toString(), 1);
+            nodoY = nodoY.getBelow();
+        }
     }
 }
