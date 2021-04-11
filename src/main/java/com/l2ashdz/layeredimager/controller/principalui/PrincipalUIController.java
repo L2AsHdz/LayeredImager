@@ -1,6 +1,8 @@
 package com.l2ashdz.layeredimager.controller.principalui;
 
+import com.l2ashdz.layeredimager.controller.cargadatos.CargaCapasController;
 import com.l2ashdz.layeredimager.view.PrincipalView;
+import com.l2ashdz.layeredimager.view.cargadatos.CargaCapasView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -13,9 +15,26 @@ import java.awt.event.ActionListener;
 public class PrincipalUIController implements ActionListener {
     
     private PrincipalView view;
+    
+    //Vista y Controllador para cargar capas
+    CargaCapasView capasV = new CargaCapasView();
+    CargaCapasController capasC = new CargaCapasController(capasV);
 
     public PrincipalUIController(PrincipalView view) {
         this.view = view;
+        
+        this.view.getItmCargaCaps().addActionListener(this);
+        this.view.getItmCargaImages().addActionListener(this);
+        this.view.getItmCargaUsers().addActionListener(this);
+        
+        this.view.getItmUser().addActionListener(this);
+        this.view.getItmImage().addActionListener(this);
+        
+        this.view.getItmListImg().addActionListener(this);
+        this.view.getItmTreeCaps().addActionListener(this);
+        this.view.getItmCaps().addActionListener(this);
+        this.view.getItmImgCaps().addActionListener(this);
+        this.view.getItmTreeUsers().addActionListener(this);
     }
     
     public void iniciar() {
@@ -25,8 +44,15 @@ public class PrincipalUIController implements ActionListener {
     }
 
     @Override
-    public void actionPerformed(ActionEvent ae) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void actionPerformed(ActionEvent e) {
+        
+        if (e.getSource() == view.getItmCargaCaps()) {
+            capasC.iniciar(view.getPnlDesk());
+        } else if (e.getSource() == view.getItmCargaImages()) {
+            
+        } else if (e.getSource() == view.getItmCargaUsers()) {
+            
+        }
     }
 
 }

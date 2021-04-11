@@ -5,6 +5,9 @@
  */
 package com.l2ashdz.layeredimager.view;
 
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+
 /**
  *
  * @author asael
@@ -27,84 +30,84 @@ public class PrincipalView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        pnlDesk = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        JMenu1 = new javax.swing.JMenu();
+        itmCargaCaps = new javax.swing.JMenuItem();
+        itmCargaImages = new javax.swing.JMenuItem();
+        itmCargaUsers = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
+        itmUser = new javax.swing.JMenuItem();
+        itmImage = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
-        jMenuItem6 = new javax.swing.JMenuItem();
-        jMenuItem7 = new javax.swing.JMenuItem();
-        jMenuItem8 = new javax.swing.JMenuItem();
-        jMenuItem9 = new javax.swing.JMenuItem();
-        jMenuItem10 = new javax.swing.JMenuItem();
+        itmListImg = new javax.swing.JMenuItem();
+        itmTreeCaps = new javax.swing.JMenuItem();
+        itmCaps = new javax.swing.JMenuItem();
+        itmImgCaps = new javax.swing.JMenuItem();
+        itmTreeUsers = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Inter Semi Bold", 0, 56)); // NOI18N
         jLabel1.setText("Layered Imager");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnlDeskLayout = new javax.swing.GroupLayout(pnlDesk);
+        pnlDesk.setLayout(pnlDeskLayout);
+        pnlDeskLayout.setHorizontalGroup(
+            pnlDeskLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlDeskLayout.createSequentialGroup()
                 .addContainerGap(94, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(86, 86, 86))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        pnlDeskLayout.setVerticalGroup(
+            pnlDeskLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlDeskLayout.createSequentialGroup()
                 .addGap(125, 125, 125)
                 .addComponent(jLabel1)
                 .addContainerGap(185, Short.MAX_VALUE))
         );
 
-        jMenu1.setText("Carga de datos");
+        JMenu1.setText("Carga de datos");
 
-        jMenuItem1.setText("Cargar capas");
-        jMenu1.add(jMenuItem1);
+        itmCargaCaps.setText("Cargar capas");
+        JMenu1.add(itmCargaCaps);
 
-        jMenuItem2.setText("Cargar imagenes");
-        jMenu1.add(jMenuItem2);
+        itmCargaImages.setText("Cargar imagenes");
+        JMenu1.add(itmCargaImages);
 
-        jMenuItem3.setText("Cargar usuarios");
-        jMenu1.add(jMenuItem3);
+        itmCargaUsers.setText("Cargar usuarios");
+        JMenu1.add(itmCargaUsers);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(JMenu1);
 
         jMenu2.setText("CRUD");
 
-        jMenuItem4.setText("Usuarios");
-        jMenu2.add(jMenuItem4);
+        itmUser.setText("Usuarios");
+        jMenu2.add(itmUser);
 
-        jMenuItem5.setText("Imagenes");
-        jMenu2.add(jMenuItem5);
+        itmImage.setText("Imagenes");
+        jMenu2.add(itmImage);
 
         jMenuBar1.add(jMenu2);
 
         jMenu3.setText("Estado de memoria");
 
-        jMenuItem6.setText("Ver lista de imagenes");
-        jMenu3.add(jMenuItem6);
+        itmListImg.setText("Ver lista de imagenes");
+        jMenu3.add(itmListImg);
 
-        jMenuItem7.setText("Ver arbol de capas");
-        jMenu3.add(jMenuItem7);
+        itmTreeCaps.setText("Ver arbol de capas");
+        jMenu3.add(itmTreeCaps);
 
-        jMenuItem8.setText("Ver capa");
-        jMenu3.add(jMenuItem8);
+        itmCaps.setText("Ver capa");
+        jMenu3.add(itmCaps);
 
-        jMenuItem9.setText("Ver imagen y arbol de capas");
-        jMenu3.add(jMenuItem9);
+        itmImgCaps.setText("Ver imagen y arbol de capas");
+        jMenu3.add(itmImgCaps);
 
-        jMenuItem10.setText("Ver arbol de usuarios");
-        jMenu3.add(jMenuItem10);
+        itmTreeUsers.setText("Ver arbol de usuarios");
+        jMenu3.add(itmTreeUsers);
 
         jMenuBar1.add(jMenu3);
 
@@ -114,11 +117,11 @@ public class PrincipalView extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnlDesk, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnlDesk, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -160,21 +163,67 @@ public class PrincipalView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu JMenu1;
+    private javax.swing.JMenuItem itmCaps;
+    private javax.swing.JMenuItem itmCargaCaps;
+    private javax.swing.JMenuItem itmCargaImages;
+    private javax.swing.JMenuItem itmCargaUsers;
+    private javax.swing.JMenuItem itmImage;
+    private javax.swing.JMenuItem itmImgCaps;
+    private javax.swing.JMenuItem itmListImg;
+    private javax.swing.JMenuItem itmTreeCaps;
+    private javax.swing.JMenuItem itmTreeUsers;
+    private javax.swing.JMenuItem itmUser;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem10;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
-    private javax.swing.JMenuItem jMenuItem8;
-    private javax.swing.JMenuItem jMenuItem9;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel pnlDesk;
     // End of variables declaration//GEN-END:variables
+
+    public JMenuItem getItmCaps() {
+        return itmCaps;
+    }
+
+    public JMenuItem getItmCargaCaps() {
+        return itmCargaCaps;
+    }
+
+    public JMenuItem getItmCargaImages() {
+        return itmCargaImages;
+    }
+
+    public JMenuItem getItmCargaUsers() {
+        return itmCargaUsers;
+    }
+
+    public JMenuItem getItmImage() {
+        return itmImage;
+    }
+
+    public JMenuItem getItmImgCaps() {
+        return itmImgCaps;
+    }
+
+    public JMenuItem getItmListImg() {
+        return itmListImg;
+    }
+
+    public JMenuItem getItmTreeCaps() {
+        return itmTreeCaps;
+    }
+
+    public JMenuItem getItmTreeUsers() {
+        return itmTreeUsers;
+    }
+
+    public JMenuItem getItmUser() {
+        return itmUser;
+    }
+
+    public JPanel getPnlDesk() {
+        return pnlDesk;
+    }
+
+    
 }
