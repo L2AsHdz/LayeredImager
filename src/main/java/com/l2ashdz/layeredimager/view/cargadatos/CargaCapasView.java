@@ -6,6 +6,7 @@
 package com.l2ashdz.layeredimager.view.cargadatos;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JTextArea;
 
 /**
@@ -32,7 +33,7 @@ public class CargaCapasView extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         txtAreaInfo = new javax.swing.JTextArea();
-        jLabel1 = new javax.swing.JLabel();
+        lblNameFile = new javax.swing.JLabel();
         btnBuscar = new javax.swing.JButton();
         btnCargar = new javax.swing.JButton();
 
@@ -43,8 +44,8 @@ public class CargaCapasView extends javax.swing.JPanel {
         txtAreaInfo.setRows(5);
         jScrollPane1.setViewportView(txtAreaInfo);
 
-        jLabel1.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jLabel1.setText("*No se ha escogido un archivo*");
+        lblNameFile.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        lblNameFile.setText("*No se ha escogido un archivo*");
 
         btnBuscar.setText("Buscar archivo");
 
@@ -61,7 +62,7 @@ public class CargaCapasView extends javax.swing.JPanel {
                     .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
+                            .addComponent(lblNameFile)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnBuscar)
                                 .addGap(18, 18, 18)
@@ -73,7 +74,7 @@ public class CargaCapasView extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(lblNameFile)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnBuscar)
@@ -88,8 +89,8 @@ public class CargaCapasView extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCargar;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblNameFile;
     private javax.swing.JTextArea txtAreaInfo;
     // End of variables declaration//GEN-END:variables
 
@@ -105,5 +106,7 @@ public class CargaCapasView extends javax.swing.JPanel {
         return txtAreaInfo;
     }
 
-    
+    public JLabel getLblNameFile() {
+        return lblNameFile;
+    }
 }

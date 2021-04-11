@@ -1,9 +1,15 @@
 package com.l2ashdz.layeredimager.controller.cargadatos;
 
+import com.l2ashdz.layeredimager.analyzer.Analyzer;
+import com.l2ashdz.layeredimager.analyzer.LayerFileAnalyzer;
+import static com.l2ashdz.layeredimager.controller.FileController.readFile;
+import com.l2ashdz.layeredimager.edd.tree.ArbolAVL;
 import com.l2ashdz.layeredimager.view.cargadatos.CargaCapasView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JFileChooser;
 import javax.swing.JPanel;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -13,10 +19,14 @@ import javax.swing.JPanel;
  */
 public class CargaCapasController implements ActionListener {
 
-    CargaCapasView capasV; 
+    private CargaCapasView capasV; 
+    private ArbolAVL capas;
 
     public CargaCapasController(CargaCapasView capasV) {
         this.capasV = capasV;
+        
+        this.capasV.getBtnBuscar().addActionListener(this);
+        this.capasV.getBtnCargar().addActionListener(this);
     }
     
     public void iniciar(JPanel parent) {
@@ -32,7 +42,45 @@ public class CargaCapasController implements ActionListener {
     }
 
     @Override
-    public void actionPerformed(ActionEvent ae) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == capasV.getBtnBuscar()) {
+            String content = buscarArchivo();
+            if (!content.isEmpty()) {
+                //analizar
+                capasV.getTxtAreaInfo().setText(content);
+                capasV.getBtnCargar().setEnabled(true);
+            }
+        } else if (e.getSource() == capasV.getBtnCargar()) {
+            cargarCapas(capasV.getTxtAreaInfo().getText());
+        }
+    }
+
+    private String buscarArchivo() {
+        String content = "";
+
+        JFileChooser fc = new JFileChooser();
+        fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        fc.addChoosableFileFilter(new FileNameExtensionFilter("CAP Documents", "cap"));
+        fc.setAcceptAllFileFilterUsed(false);
+        fc.showOpenDialog(this.capasV);
+        try {
+            String path = fc.getSelectedFile().getAbsolutePath();
+            capasV.getLblNameFile().setText(path);
+            content = readFile(path);
+        } catch (Exception ex) {
+            System.out.println("se cancelo");
+        }
+        return content;
+    }
+
+    private void cargarCapas(String text) {
+        LayerFileAnalyzer analizer = new LayerFileAnalyzer();
+        analizer.analyze(text);
+        capas = analizer.getCapas();
+        capasV.getTxtAreaInfo().setText("Capas cargadas exitosamente!");
+    }
+    
+    public ArbolAVL getCapas() {
+        return this.capas;
     }
 }
