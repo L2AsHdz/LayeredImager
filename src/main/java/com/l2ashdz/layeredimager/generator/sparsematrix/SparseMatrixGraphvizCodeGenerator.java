@@ -33,6 +33,7 @@ public class SparseMatrixGraphvizCodeGenerator extends Generator {
         genereteMatrixNodes();
         generetePoinsters();
         generateRanks();
+        generateLinksVoidPoints();
         addLine("}", 0);
 
         return text.toString();
@@ -42,12 +43,18 @@ public class SparseMatrixGraphvizCodeGenerator extends Generator {
         addLine("""
                 digraph SparseMatrix {
                     node [shape=box]
-
                     Mt[ label = "Matriz", width = 1.5, group = 1 ];
-
-                    e0[ shape = point, width = 0 ];
-                    e1[ shape = point, width = 0 ];
-                """, 0);
+                    e0[ shape = point, width = 0 ];""", 0);
+        generateVoidPoints();
+    }
+    
+    private void generateVoidPoints() {
+        Nodo<Integer> nodoY = matriz.getRaiz().getBelow();
+        
+        while (nodoY != null) {
+            addLine("e"+nodoY.getDato()+"[ shape = point, width = 0 ];", 1);
+            nodoY = nodoY.getBelow();
+        }
     }
 
     private void generateYAxis() {
@@ -134,7 +141,7 @@ public class SparseMatrixGraphvizCodeGenerator extends Generator {
             texto.append(" X").append(x).append("; ");
             currentX = currentX.getNext();
         }
-        texto.append("}");
+        texto.append("e0; }");
 
         return texto.toString();
     }
@@ -163,9 +170,7 @@ public class SparseMatrixGraphvizCodeGenerator extends Generator {
                     g++;
                 }
             }
-            addLine("", 0);
         }
-
     }
 
     private void generetePoinsters() {
@@ -219,7 +224,6 @@ public class SparseMatrixGraphvizCodeGenerator extends Generator {
 
                 currentNode = (MatrixNode) currentNode.getNext();
             }
-            pointers.append("\n");
             addLine(pointers.toString(), 1);
             nodoY = nodoY.getBelow();
         }
@@ -240,9 +244,24 @@ public class SparseMatrixGraphvizCodeGenerator extends Generator {
                 texto.append(x).append(y).append("; ");
                 currentNode = (MatrixNode) currentNode.getNext();
             }
+            texto.append("e").append(nodoY.getDato()).append(";");
             texto.append("}");
             addLine(texto.toString(), 1);
             nodoY = nodoY.getBelow();
         }
+    }
+    
+    private void generateLinksVoidPoints() {
+        Nodo<Integer> nodoY = matriz.getRaiz().getBelow();
+        StringBuilder links = new StringBuilder();
+        links.append("e0 ->");
+        while (nodoY != null) {
+            links.append("e").append(nodoY.getDato()).append(" -> ");
+            nodoY = nodoY.getBelow();
+        }
+        links.deleteCharAt(links.lastIndexOf(">"));
+        links.deleteCharAt(links.lastIndexOf("-"));
+        links.append("[ dir = none ]").append(";");
+        addLine(links.toString(), 1);
     }
 }

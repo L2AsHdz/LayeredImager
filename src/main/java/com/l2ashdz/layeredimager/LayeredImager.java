@@ -27,7 +27,7 @@ public class LayeredImager {
     public static void pruebaMatriz() {
         SparseMatrix matriz = new SparseMatrix();
 
-        /*matriz.add(Integer.parseInt("e74c3c", 16), 3, 3);
+        matriz.add(Integer.parseInt("e74c3c", 16), 3, 3);
         matriz.add(2, 5, 5);
         matriz.add(3, 1, 1);
         matriz.add(9, 6, 1);
@@ -36,11 +36,20 @@ public class LayeredImager {
         matriz.add(6, 2, 9);
         matriz.add(7, 10, 10);
         matriz.add(8, 1, 7);
-        matriz.add(8, 2, 10);*/
+        matriz.add(8, 2, 10);
+        
+        matriz.add(8, 4, 1);
+        matriz.add(8, 11, 1);
+        matriz.add(8, 2, 5);
+        matriz.add(8, 7, 5);
+        matriz.add(8, 11, 5);
+        matriz.add(8, 2, 6);
+        matriz.add(8, 4, 6);
+        matriz.add(8, 7, 15);
+        matriz.add(8, 11, 15);
         
         
-        
-        /*matriz.add(7, 1, 1);
+        matriz.add(7, 1, 1);
         matriz.add(7, 1, 2);
         matriz.add(7, 1, 3);
         matriz.add(7, 1, 4);
@@ -49,7 +58,7 @@ public class LayeredImager {
         matriz.add(7, 2, 5);
         matriz.add(7, 7, 1);
         matriz.add(7, 7, 2);
-        matriz.add(231, 1, 5);*/
+        matriz.add(231, 1, 5);
         
         var generator = new SparseMatrixGraphvizCodeGenerator(matriz);
 
