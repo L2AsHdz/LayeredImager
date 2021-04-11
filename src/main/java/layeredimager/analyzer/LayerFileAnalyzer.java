@@ -27,9 +27,5 @@ public class LayerFileAnalyzer implements Analyzer {
         } catch (Exception e) {
         }
     }
-    
-    public ArbolAVL getCapas() {
-        return parser.getCapas();
-    }
 
 }

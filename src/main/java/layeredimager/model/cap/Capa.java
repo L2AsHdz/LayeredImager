@@ -1,6 +1,7 @@
-package layeredimager.model;
+package layeredimager.model.cap;
 
 import layeredimager.edd.sparsematrix.SparseMatrix;
+import layeredimager.model.Objeto;
 
 /**
  *

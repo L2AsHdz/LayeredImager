@@ -7,5 +7,5 @@ echo ----------------------------------------------------------------------
 echo Compilando Parser...
 cup -parser CapParser -symbols CapSym capParser.cup
 
-mv CapLexer.java /home/asael/NetBeansProjects/LayeredImager/src/main/java/com/l2ashdz/layeredimager/analizador/lexico/
-mv CapParser.java CapSym.java /home/asael/NetBeansProjects/LayeredImager/src/main/java/com/l2ashdz/layeredimager/analizador/sintactico/
+mv CapLexer.java /home/asael/NetBeansProjects/LayeredImager/src/main/java/layeredimager/analizador/lexico/
+mv CapParser.java CapSym.java /home/asael/NetBeansProjects/LayeredImager/src/main/java/layeredimager/analizador/sintactico/

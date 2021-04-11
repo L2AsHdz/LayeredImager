@@ -5,9 +5,13 @@
 
 package layeredimager.analizador.sintactico;
 
+import java.util.ArrayList;
+import java.util.List;
 import layeredimager.edd.sparsematrix.SparseMatrix;
 import layeredimager.edd.tree.ArbolAVL;
-import layeredimager.model.Capa;
+import layeredimager.model.cap.Capa;
+import layeredimager.model.cap.InfoCap;
+import layeredimager.model.cap.InfoNodo;
 import java_cup.runtime.Symbol;
 import java_cup.runtime.XMLElement;
 
@@ -109,8 +113,11 @@ public class CapParser extends java_cup.runtime.lr_parser {
     SparseMatrix matriz = new SparseMatrix();
     ArbolAVL capas = new ArbolAVL();
 
-    public ArbolAVL getCapas() {
-        return this.capas;
+    List<InfoCap> infoCapas = new ArrayList();
+    List<InfoNodo> infoNodos = new ArrayList();
+
+    public List<InfoCap> getInfoCapas() {
+        return this.infoCapas;
     }
 
     public void syntax_error(Symbol s) {
@@ -186,8 +193,8 @@ class CUP$CapParser$actions {
 		int idright = ((java_cup.runtime.Symbol)CUP$CapParser$stack.elementAt(CUP$CapParser$top-2)).right;
 		String id = (String)((java_cup.runtime.Symbol) CUP$CapParser$stack.elementAt(CUP$CapParser$top-2)).value;
 		
-            capas.add(new Capa(matriz, Integer.parseInt(id)));
-            matriz = new SparseMatrix();
+            infoCapas.add(new InfoCap(Integer.parseInt(id), infoNodos));
+            infoNodos = new ArrayList();
         
               CUP$CapParser$result = parser.getSymbolFactory().newSymbol("capa",1, ((java_cup.runtime.Symbol)CUP$CapParser$stack.elementAt(CUP$CapParser$top-2)), ((java_cup.runtime.Symbol)CUP$CapParser$stack.peek()), RESULT);
             }
@@ -226,7 +233,7 @@ class CUP$CapParser$actions {
 		String c = (String)((java_cup.runtime.Symbol) CUP$CapParser$stack.peek()).value;
 		
                 String color = c.replace("#", "");
-                matriz.add(Integer.parseInt(color, 16), Integer.parseInt(x), Integer.parseInt(y));
+                infoNodos.add(new InfoNodo(Integer.parseInt(color, 16), Integer.parseInt(x), Integer.parseInt(y)));
            
               CUP$CapParser$result = parser.getSymbolFactory().newSymbol("infoNodo",3, ((java_cup.runtime.Symbol)CUP$CapParser$stack.elementAt(CUP$CapParser$top-4)), ((java_cup.runtime.Symbol)CUP$CapParser$stack.peek()), RESULT);
             }

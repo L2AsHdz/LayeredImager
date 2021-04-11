@@ -1,7 +1,7 @@
-package com.l2ashdz.layeredimager.analizador.lexico;
+package layeredimager.analizador.lexico;
 
 import java_cup.runtime.Symbol;
-import static com.l2ashdz.layeredimager.analizador.sintactico.CapSym.*;
+import static layeredimager.analizador.sintactico.CapSym.*;
 
 %%
 

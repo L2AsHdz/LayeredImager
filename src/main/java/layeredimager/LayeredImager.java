@@ -11,7 +11,7 @@ import layeredimager.edd.list.Lista;
 import layeredimager.edd.sparsematrix.SparseMatrix;
 import layeredimager.edd.tree.ArbolAVL;
 import layeredimager.generator.sparsematrix.SparseMatrixGraphvizCodeGenerator;
-import layeredimager.model.Capa;
+import layeredimager.model.cap.Capa;
 import layeredimager.model.image.Imagen;
 import layeredimager.model.user.Usuario;
 import static layeredimager.controller.FileController.saveFile;
@@ -145,11 +145,11 @@ public class LayeredImager {
         } catch (Exception e) {
             e.printStackTrace(System.out);
         }
-        ArbolAVL arbol = parser.getCapas();
+        /*ArbolAVL arbol = parser.getCapas();
         arbol.inOrden(arbol.getRaiz());
         System.out.println();
         Capa cap = (Capa) arbol.get(1);
-        System.out.println(cap.getName() + "\n");
+        System.out.println(cap.getName() + "\n");*/
         
     }
 

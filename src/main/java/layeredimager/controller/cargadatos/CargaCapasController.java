@@ -73,8 +73,8 @@ public class CargaCapasController implements ActionListener {
     private void cargarCapas(String text) {
         LayerFileAnalyzer analizer = new LayerFileAnalyzer();
         analizer.analyze(text);
-        capas = analizer.getCapas();
-        capasV.getTxtAreaInfo().setText("Capas cargadas al sistema exitosamente!");
+        /*capas = analizer.getCapas();
+        capasV.getTxtAreaInfo().setText("Capas cargadas al sistema exitosamente!");*/
     }
 
     public ArbolAVL getCapas() {
