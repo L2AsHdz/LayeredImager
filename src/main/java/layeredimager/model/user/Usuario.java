@@ -1,6 +1,6 @@
 package layeredimager.model.user;
 
-import layeredimager.model.Objeto;
+import layeredimager.edd.list.Lista;
 
 /**
  *
@@ -8,17 +8,17 @@ import layeredimager.model.Objeto;
  * @time 21:23:40
  * @author asael
  */
-public class Usuario extends Objeto {
+public class Usuario {
 
     private String nombre;
-    //private ListaImagenes
+    private Lista imagenes;
 
     public Usuario() {
     }
 
-    public Usuario(int id, String nombre) {
-        super(id);
+    public Usuario(String nombre, Lista imagenes) {
         this.nombre = nombre;
+        this.imagenes = imagenes;
     }
 
     public String getNombre() {
@@ -27,5 +27,13 @@ public class Usuario extends Objeto {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public Lista getImagenes() {
+        return imagenes;
+    }
+
+    public void setImagenes(Lista imagenes) {
+        this.imagenes = imagenes;
     }
 }

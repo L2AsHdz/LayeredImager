@@ -5,9 +5,12 @@ import java.awt.event.ActionListener;
 import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import layeredimager.analyzer.UserFileAnalizer;
 import static layeredimager.controller.FileController.readFile;
 import layeredimager.edd.list.CircularList;
+import layeredimager.edd.list.Lista;
 import layeredimager.edd.tree.ArbolAVL;
+import layeredimager.model.image.Imagen;
 import layeredimager.view.cargadatos.CargaFileView;
 
 /**
@@ -73,6 +76,28 @@ public class CargaUsersController implements ActionListener {
 
     private void cargarDatos(String text) {
         StringBuilder texto = new StringBuilder();
+        UserFileAnalizer analyzer = new UserFileAnalizer();
+        analyzer.analyze(text);
+        
+        analyzer.getInfoUsers().forEach(u -> {
+            boolean canSaved = true;
+            Lista imagesList = new Lista();
+            for (Integer i : u.getIdImages()) {
+                Imagen img = images.get(i);
+                if (img != null) {
+                    imagesList.add(img);
+                } else {
+                    canSaved = false;
+                    texto.append("La imagen ").append(i).append(" no existe en el sistema\n");
+                }
+            }
+            if (canSaved) {
+                //users.add(o);
+                texto.append("Usuario ").append(u.getName()).append(" ingresado al sistema");
+            } else {
+                texto.append("No se ingreso al sistema el usuario ").append(u.getName()).append("\n");
+            }
+        });
         
     }
 
