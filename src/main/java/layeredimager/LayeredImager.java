@@ -9,7 +9,6 @@ import layeredimager.analizador.sintactico.UserParser;
 import layeredimager.edd.list.CircularList;
 import layeredimager.edd.list.Lista;
 import layeredimager.edd.sparsematrix.SparseMatrix;
-import layeredimager.edd.tree.ArbolAVL;
 import layeredimager.generator.sparsematrix.SparseMatrixGraphvizCodeGenerator;
 import layeredimager.model.cap.Capa;
 import layeredimager.model.image.Imagen;
@@ -21,6 +20,7 @@ import layeredimager.model.user.InfoUser;
 import layeredimager.view.PrincipalView;
 import java.io.StringReader;
 import java.util.List;
+import layeredimager.edd.tree.UserArbolAVL;
 
 /**
  *
@@ -195,18 +195,18 @@ public class LayeredImager {
     }
 
     private static void pruebaArbolAVL() {
-        ArbolAVL arbol = new ArbolAVL();
+        UserArbolAVL arbol = new UserArbolAVL();
 
-        Usuario user1 = new Usuario(10, "nombre1");
-        Usuario user2 = new Usuario(5, "nombre2");
-        Usuario user3 = new Usuario(13, "nombre3");
-        Usuario user4 = new Usuario(1, "nombre4");
-        Usuario user5 = new Usuario(6, "nombre5");
-        Usuario user6 = new Usuario(17, "nombre5");
-        Usuario user7 = new Usuario(16, "nombre5");
-        Usuario user8 = new Usuario(0, "nombre5");
-        Usuario user9 = new Usuario(-1, "menos1");
-        Usuario user10 = new Usuario(-5, "nombre544");
+        Usuario user3 = new Usuario("nombre3", null);
+        Usuario user1 = new Usuario("nombre1", null);
+        Usuario user2 = new Usuario("nombre2", null);
+        Usuario user8 = new Usuario("nombre41", null);
+        Usuario user4 = new Usuario("nombre4", null);
+        Usuario user5 = new Usuario("nombre5", null);
+        Usuario user6 = new Usuario("nombre8", null);
+        Usuario user7 = new Usuario("nombre14", null);
+        Usuario user9 = new Usuario("menos11", null);
+        Usuario user10 = new Usuario("nombre544", null);
 
         arbol.add(user1);
         arbol.add(user2);
@@ -221,32 +221,14 @@ public class LayeredImager {
 
         arbol.inOrden(arbol.getRaiz());
 
-        Usuario userR = (Usuario) arbol.get(-1);
+        Usuario userR = (Usuario) arbol.get("nombre1");
 
-        arbol.remove(0);
+        arbol.remove("menos11");
 
         System.out.println();
         arbol.inOrden(arbol.getRaiz());
 
         System.out.println("\n" + userR.getNombre());
-    }
-
-    private static void pruebaListaUsuario() {
-        Usuario user1 = new Usuario(1, "nombre1");
-        Usuario user2 = new Usuario(2, "nombre2");
-        Usuario user3 = new Usuario(3, "nombre3");
-        Usuario user4 = new Usuario(4, "nombre4");
-        Usuario user5 = new Usuario(5, "nombre5");
-
-        Lista userList = new Lista();
-
-        userList.add(user1);
-        userList.add(user2);
-        userList.add(user3);
-        userList.add(user4);
-        userList.add(user5);
-
-        userList.show();
     }
 
     private static void pruebaListaCapas() {

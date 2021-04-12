@@ -9,8 +9,9 @@ import layeredimager.analyzer.UserFileAnalizer;
 import static layeredimager.controller.FileController.readFile;
 import layeredimager.edd.list.CircularList;
 import layeredimager.edd.list.Lista;
-import layeredimager.edd.tree.ArbolAVL;
+import layeredimager.edd.tree.UserArbolAVL;
 import layeredimager.model.image.Imagen;
+import layeredimager.model.user.Usuario;
 import layeredimager.view.cargadatos.CargaFileView;
 
 /**
@@ -22,7 +23,7 @@ import layeredimager.view.cargadatos.CargaFileView;
 public class CargaUsersController implements ActionListener {
 
     private final CargaFileView usersV;
-    private ArbolAVL users = new ArbolAVL();
+    private UserArbolAVL users = new UserArbolAVL();
     private CircularList images;
 
     public CargaUsersController(CargaFileView usersV) {
@@ -92,12 +93,13 @@ public class CargaUsersController implements ActionListener {
                 }
             }
             if (canSaved) {
-                //users.add(o);
-                texto.append("Usuario ").append(u.getName()).append(" ingresado al sistema");
+                users.add(new Usuario(u.getName(), imagesList));
+                texto.append("Usuario ").append(u.getName()).append(" ingresado al sistema\n");
             } else {
                 texto.append("No se ingreso al sistema el usuario ").append(u.getName()).append("\n");
             }
         });
+        usersV.getTxtAreaInfo().setText(texto.toString());
         
     }
 
@@ -105,7 +107,7 @@ public class CargaUsersController implements ActionListener {
         this.images = images;
     }
 
-    public ArbolAVL getUsers() {
+    public UserArbolAVL getUsers() {
         return users;
     }
 }

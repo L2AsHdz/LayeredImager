@@ -12,11 +12,7 @@ import layeredimager.model.Objeto;
 public class ArbolAVL {
 
     private TreeNode<Objeto> root;
-
-    /*private int getFactorEquilibrio(Nodo<Objeto> root) {
-        
-        
-    }*/
+    
     private TreeNode<Objeto> rightRotation(TreeNode<Objeto> oldRoot) {
         TreeNode<Objeto> newRoot = oldRoot.getLeft();
         oldRoot.setLeft(newRoot.getRight());
@@ -68,8 +64,8 @@ public class ArbolAVL {
 
     public void postOrden(TreeNode<Objeto> root) {
         if (root != null) {
-            preOrden(root.getLeft());
-            preOrden(root.getRight());
+            postOrden(root.getLeft());
+            postOrden(root.getRight());
             System.out.print(root.getDato().getId() + ", ");
         }
     }
