@@ -14,6 +14,7 @@ import layeredimager.edd.tree.ArbolAVL;
 import layeredimager.generator.sparsematrix.SparseMatrixGraphvizCodeGenerator;
 import layeredimager.model.Objeto;
 import layeredimager.model.cap.Capa;
+import static layeredimager.controller.FileController.abrirArchivo;
 
 /**
  *
@@ -49,7 +50,7 @@ public class GenerarMatrizCapaController implements ActionListener {
         Capa capa = (Capa) capas.get(Integer.parseInt(idCapa));
         generarArchivoDot(capa.getMatriz());
         generarPng();
-        abrirarchivo("matriz.png");
+        abrirArchivo("matriz.png");
     }
 
     private void cargarDatos(TreeNode<Objeto> root) {
@@ -75,15 +76,5 @@ public class GenerarMatrizCapaController implements ActionListener {
         } catch (IOException e) {
             e.printStackTrace(System.out);
         }
-    }
-
-    public void abrirarchivo(String archivo) {
-        try {
-            File objetofile = new File(archivo);
-            Desktop.getDesktop().open(objetofile);
-        } catch (IOException ex) {
-            ex.printStackTrace(System.out);
-        }
-
     }
 }

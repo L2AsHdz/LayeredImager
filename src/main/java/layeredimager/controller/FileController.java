@@ -1,5 +1,6 @@
 package layeredimager.controller;
 
+import java.awt.Desktop;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -78,5 +79,15 @@ public class FileController {
 
     public static boolean verifyFile(String archivo) {
         return new File(archivo).exists();
+    }
+    
+    public static void abrirArchivo(String archivo) {
+        try {
+            File objetofile = new File(archivo);
+            Desktop.getDesktop().open(objetofile);
+        } catch (IOException ex) {
+            ex.printStackTrace(System.out);
+        }
+
     }
 }

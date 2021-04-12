@@ -1,13 +1,20 @@
 package layeredimager.controller.principalui;
 
+import java.awt.Desktop;
 import layeredimager.controller.cargadatos.CargaCapasController;
 import layeredimager.controller.cargadatos.CargaImagesController;
 import layeredimager.view.PrincipalView;
 import layeredimager.view.cargadatos.CargaFileView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
+import static layeredimager.controller.FileController.abrirArchivo;
+import static layeredimager.controller.FileController.saveFile;
 import layeredimager.controller.cargadatos.CargaUsersController;
 import layeredimager.controller.memorystatus.GenerarMatrizCapaController;
+import layeredimager.edd.tree.ArbolAVL;
+import layeredimager.generator.tree.AvlTreegraphvizCodeGenerator;
 import layeredimager.view.memorystatus.GenerarMatrizCapaView;
 
 /**
@@ -72,7 +79,31 @@ public class PrincipalUIController implements ActionListener {
             usersC.iniciar(view.getPnlDesk());
         } else if (e.getSource() == view.getItmCaps()) {
             generarMatrizC.iniciar(view.getPnlDesk());
+        } else if (e.getSource() == view.getItmTreeCaps()) {
+            generarImagenCapas(capasC.getCapas());
         }
     }
 
+    private void generarImagenCapas(ArbolAVL capas) {
+        generarArchivoDot(capas);
+        generarPng();
+        abrirArchivo("arbolCapas.png");
+    }
+
+    private void generarArchivoDot(ArbolAVL capas) {
+        var generator = new AvlTreegraphvizCodeGenerator(capas);
+        saveFile("arbolCapas.dot", generator.generate());
+    }
+
+    private void generarPng() {
+        try {
+            ProcessBuilder pbuilder;
+            pbuilder = new ProcessBuilder("dot", "-Tpng", "-o", "arbolCapas.png", "arbolCapas.dot");
+            pbuilder.redirectErrorStream(true);
+            pbuilder.start();
+
+        } catch (IOException e) {
+            e.printStackTrace(System.out);
+        }
+    }
 }
