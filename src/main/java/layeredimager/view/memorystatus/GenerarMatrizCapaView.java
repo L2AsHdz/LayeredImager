@@ -80,5 +80,7 @@ public class GenerarMatrizCapaView extends javax.swing.JPanel {
         return cbCapas;
     }
 
-    
+    public void limpiarCampos() {
+        cbCapas.removeAllItems();
+    }
 }

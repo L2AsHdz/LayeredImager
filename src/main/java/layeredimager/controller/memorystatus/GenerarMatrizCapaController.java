@@ -35,6 +35,7 @@ public class GenerarMatrizCapaController implements ActionListener {
         generarMView.setVisible(true);
         parent.add(generarMView);
         parent.validate();
+        generarMView.limpiarCampos();
         cargarDatos(capas.getRaiz());
     }
 
