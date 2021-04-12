@@ -1,6 +1,7 @@
 package layeredimager.imagegenerator.list;
 
 import layeredimager.codegenerator.list.ListGraphvizCodeGenerator;
+import static layeredimager.controller.FileController.abrirArchivo;
 import static layeredimager.controller.FileController.saveFile;
 import layeredimager.edd.list.CircularList;
 import layeredimager.imagegenerator.ImageGenerator;
@@ -22,6 +23,8 @@ public class ImagesCapImageGenerator extends ImageGenerator {
     @Override
     public void generate() {
         generarArchivoDot(images);
+        generarPng("listImages.dot", "listImages.png");
+        abrirArchivo("listImages.png");
     }
     
     private void generarArchivoDot(CircularList images) {

@@ -30,6 +30,7 @@ public class ListGraphvizCodeGenerator extends CodeGenerator {
         generarNodosCaps();
         generateRank();
         generarPointers();
+        generarPointersCaps();
         addLine("}", 0);
 
         return text.toString();
@@ -71,9 +72,9 @@ public class ListGraphvizCodeGenerator extends CodeGenerator {
                     while (actualC != null) {
                         int idI = actual.getDato().getId();
                         int idC = actualC.getDato().getId();
-                        String nameImg = "img" + idI + idC;
-                        String nameCap = ((Capa) inicio.getDato()).getName();
-                        text.append("    ").append(nameImg).append("[label = \"")
+                        String nameC = "cap" + idI + idC;
+                        String nameCap = ((Capa) actualC.getDato()).getName();
+                        text.append("    ").append(nameC).append("[label = \"")
                                 .append(nameCap).append("\" ];\n");
                         actualC = actualC.getNext();
                     }
@@ -121,6 +122,35 @@ public class ListGraphvizCodeGenerator extends CodeGenerator {
                             .append(nameP).append(";\n");
                 }
 
+                actual = actual.getNext();
+            } while (actual != primero);
+        }
+    }
+    
+    private void generarPointersCaps() {
+        Nodo<Imagen> primero = images.getPrimero();
+        Nodo<Imagen> actual = primero;
+
+        if (actual != null) {
+            do {
+                Nodo<Objeto> inicio = actual.getDato().getCapas().getInicio();
+                Nodo<Objeto> actualC = inicio;
+
+                if (actualC != null) {
+                    String name = actual.getDato().getNombre();
+                    text.append("    ").append(name).append(" -> ");
+                    while (actualC != null) {
+                        int idI = actual.getDato().getId();
+                        int idC = actualC.getDato().getId();
+                        String nameC = "cap" + idI + idC;
+                        text.append(nameC).append(" -> ");
+                        
+                        actualC = actualC.getNext();
+                    }
+                    text.deleteCharAt(text.lastIndexOf(">"));
+                    text.deleteCharAt(text.lastIndexOf("-"));
+                    text.append(";\n");
+                }
                 actual = actual.getNext();
             } while (actual != primero);
         }
