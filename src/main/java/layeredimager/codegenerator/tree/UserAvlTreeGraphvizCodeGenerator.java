@@ -1,23 +1,22 @@
-package layeredimager.generator.tree;
+package layeredimager.codegenerator.tree;
 
 import layeredimager.edd.TreeNode;
-import layeredimager.edd.tree.ArbolAVL;
-import layeredimager.generator.Generator;
-import layeredimager.model.Objeto;
-import layeredimager.model.cap.Capa;
+import layeredimager.edd.tree.UserArbolAVL;
+import layeredimager.codegenerator.CodeGenerator;
+import layeredimager.model.user.Usuario;
 
 /**
  *
  * @date 12/04/2021
- * @time 01:28:03
+ * @time 02:09:29
  * @author asael
  */
-public class AvlTreegraphvizCodeGenerator extends Generator {
+public class UserAvlTreeGraphvizCodeGenerator extends CodeGenerator {
+    
+    private UserArbolAVL users; 
 
-    private ArbolAVL capas;
-
-    public AvlTreegraphvizCodeGenerator(ArbolAVL capas) {
-        this.capas = capas;
+    public UserAvlTreeGraphvizCodeGenerator(UserArbolAVL users) {
+        this.users = users;
     }
 
     @Override
@@ -25,23 +24,23 @@ public class AvlTreegraphvizCodeGenerator extends Generator {
         text = new StringBuilder();
 
         generateHeader();
-        generateNodos(capas.getRaiz());
-        generarPointers(capas.getRaiz());
+        generateNodos(users.getRaiz());
+        generarPointers(users.getRaiz());
         addLine("}", 0);
 
         return text.toString();
     }
-
+    
     private void generateHeader() {
         addLine("""
-                digraph grafica{
+                digraph arbolUsers{
                     rankdir=TB;
                     node [shape = record];""", 0);
     }
-
-    private void generateNodos(TreeNode<Objeto> root) {
+    
+    private void generateNodos(TreeNode<Usuario> root) {
         if (root != null) {
-            String id = ((Capa)root.getDato()).getName();
+            String id = root.getDato().getNombre();
             generateNodos(root.getLeft());
             text.append("    ").append(id);
             if (root.getLeft() == null && root.getRight() == null) {
@@ -53,18 +52,18 @@ public class AvlTreegraphvizCodeGenerator extends Generator {
             generateNodos(root.getRight());
         }
     }
-
-    private void generarPointers(TreeNode<Objeto> root) {
+    
+    private void generarPointers(TreeNode<Usuario> root) {
         if (root != null) {
-            String name = ((Capa)root.getDato()).getName();
+            String name = root.getDato().getNombre();
             generarPointers(root.getLeft());
             if (root.getLeft() != null) {
-                String nameL = ((Capa)root.getLeft().getDato()).getName();
+                String nameL = root.getLeft().getDato().getNombre();
                 text.append("    ").append(name).append(":C0").append(" -> ")
                         .append(nameL).append(";\n");
             }
             if (root.getRight() != null) {
-                String nameR = ((Capa)root.getRight().getDato()).getName();
+                String nameR = root.getRight().getDato().getNombre();
                 text.append("    ").append(name).append(":C1").append(" -> ")
                         .append(nameR).append(";\n");
             }

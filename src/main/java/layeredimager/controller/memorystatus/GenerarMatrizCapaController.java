@@ -1,9 +1,7 @@
 package layeredimager.controller.memorystatus;
 
-import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 import java.io.IOException;
 import javax.swing.JPanel;
 import static layeredimager.controller.FileController.saveFile;
@@ -11,7 +9,7 @@ import layeredimager.edd.TreeNode;
 import layeredimager.edd.sparsematrix.SparseMatrix;
 import layeredimager.view.memorystatus.GenerarMatrizCapaView;
 import layeredimager.edd.tree.ArbolAVL;
-import layeredimager.generator.sparsematrix.SparseMatrixGraphvizCodeGenerator;
+import layeredimager.codegenerator.sparsematrix.SparseMatrixGraphvizCodeGenerator;
 import layeredimager.model.Objeto;
 import layeredimager.model.cap.Capa;
 import static layeredimager.controller.FileController.abrirArchivo;

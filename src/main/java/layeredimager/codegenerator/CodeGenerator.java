@@ -1,4 +1,4 @@
-package layeredimager.generator;
+package layeredimager.codegenerator;
 
 /**
  *
@@ -6,7 +6,7 @@ package layeredimager.generator;
  * @time 19:38:14
  * @author asael
  */
-public abstract class Generator {
+public abstract class CodeGenerator {
     
     protected StringBuilder text;
     

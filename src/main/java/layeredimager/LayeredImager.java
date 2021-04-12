@@ -1,26 +1,7 @@
 package layeredimager;
 
-import layeredimager.analizador.lexico.CapLexer;
-import layeredimager.analizador.lexico.ImageLexer;
-import layeredimager.analizador.lexico.UserLexer;
-import layeredimager.analizador.sintactico.CapParser;
-import layeredimager.analizador.sintactico.ImageParser;
-import layeredimager.analizador.sintactico.UserParser;
-import layeredimager.edd.list.CircularList;
-import layeredimager.edd.list.Lista;
-import layeredimager.edd.sparsematrix.SparseMatrix;
-import layeredimager.generator.sparsematrix.SparseMatrixGraphvizCodeGenerator;
-import layeredimager.model.cap.Capa;
-import layeredimager.model.image.Imagen;
-import layeredimager.model.user.Usuario;
-import static layeredimager.controller.FileController.saveFile;
 import layeredimager.controller.principalui.PrincipalUIController;
-import layeredimager.model.image.PreImagen;
-import layeredimager.model.user.InfoUser;
 import layeredimager.view.PrincipalView;
-import java.io.StringReader;
-import java.util.List;
-import layeredimager.edd.tree.UserArbolAVL;
 
 /**
  *
@@ -36,7 +17,7 @@ public class LayeredImager {
         controller.iniciar();
     }
     
-    public static void pruebaLecturaUser() {
+    /*public static void pruebaLecturaUser() {
         String text = """
                       userM:;
                       userB:;
@@ -149,7 +130,7 @@ public class LayeredImager {
         arbol.inOrden(arbol.getRaiz());
         System.out.println();
         Capa cap = (Capa) arbol.get(1);
-        System.out.println(cap.getName() + "\n");*/
+        System.out.println(cap.getName() + "\n");
         
     }
 
@@ -274,5 +255,5 @@ public class LayeredImager {
 
         System.out.println("Objeto obtenido");
         System.out.println(img.getNombre());
-    }
+    }*/
 }

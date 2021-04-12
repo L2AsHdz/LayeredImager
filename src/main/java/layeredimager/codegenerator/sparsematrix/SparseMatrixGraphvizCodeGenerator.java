@@ -1,9 +1,9 @@
-package layeredimager.generator.sparsematrix;
+package layeredimager.codegenerator.sparsematrix;
 
 import layeredimager.edd.MatrixNode;
 import layeredimager.edd.Nodo;
 import layeredimager.edd.sparsematrix.SparseMatrix;
-import layeredimager.generator.Generator;
+import layeredimager.codegenerator.CodeGenerator;
 
 /**
  *
@@ -11,7 +11,7 @@ import layeredimager.generator.Generator;
  * @time 11:51:59
  * @author asael
  */
-public class SparseMatrixGraphvizCodeGenerator extends Generator {
+public class SparseMatrixGraphvizCodeGenerator extends CodeGenerator {
 
     private SparseMatrix matriz;
 
