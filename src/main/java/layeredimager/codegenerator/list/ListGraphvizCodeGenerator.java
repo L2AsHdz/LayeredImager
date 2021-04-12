@@ -28,6 +28,8 @@ public class ListGraphvizCodeGenerator extends CodeGenerator {
         generateHeader();
         generarNodosImagen();
         generarNodosCaps();
+        generateRank();
+        generarPointers();
         addLine("}", 0);
 
         return text.toString();
@@ -65,16 +67,58 @@ public class ListGraphvizCodeGenerator extends CodeGenerator {
                 Nodo<Objeto> actualC = inicio;
 
                 if (actualC != null) {
-                    int idI = actual.getDato().getId();
-                    int idC = actualC.getDato().getId();
-                    String nameImg = "img" + idI + idC;
-                    String nameCap = ((Capa) inicio.getDato()).getName();
-                    
+
                     while (actualC != null) {
+                        int idI = actual.getDato().getId();
+                        int idC = actualC.getDato().getId();
+                        String nameImg = "img" + idI + idC;
+                        String nameCap = ((Capa) inicio.getDato()).getName();
                         text.append("    ").append(nameImg).append("[label = \"")
                                 .append(nameCap).append("\" ];\n");
                         actualC = actualC.getNext();
                     }
+                }
+                actual = actual.getNext();
+            } while (actual != primero);
+        }
+    }
+
+    private void generateRank() {
+        Nodo<Imagen> primero = images.getPrimero();
+        Nodo<Imagen> actual = primero;
+
+        text.append("    {rank = same; ");
+        if (actual != null) {
+            do {
+                String name = actual.getDato().getNombre();
+                text.append(name).append("; ");
+
+                actual = actual.getNext();
+            } while (actual != primero);
+        }
+        text.append("}\n");
+    }
+
+    private void generarPointers() {
+        Nodo<Imagen> primero = images.getPrimero();
+        Nodo<Imagen> actual = primero;
+
+        if (actual != null) {
+            do {
+                String name = actual.getDato().getNombre();
+                String nameP = actual.getPrev().getDato().getNombre();
+                String nameN = actual.getNext().getDato().getNombre();
+
+                if (actual == primero) {
+                    text.append("    ").append(name).append(" -> ")
+                            .append(nameN).append(";\n");
+                    text.append("    ").append(name).append(" -> ")
+                            .append(nameP).append("[constraint=false]").append(";\n");
+                } else {
+                    text.append("    ").append(name).append(" -> ")
+                            .append(nameN).append(";\n");
+                    text.append("    ").append(name).append(" -> ")
+                            .append(nameP).append(";\n");
                 }
 
                 actual = actual.getNext();
