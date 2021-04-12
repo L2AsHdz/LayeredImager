@@ -7,12 +7,14 @@ import layeredimager.view.cargadatos.CargaFileView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import layeredimager.controller.cargadatos.CargaUsersController;
+import layeredimager.controller.image.AddImageController;
 import layeredimager.controller.memorystatus.GenerarMatrizCapaController;
 import layeredimager.controller.user.AddUserController;
 import layeredimager.controller.user.DeleteUserController;
 import layeredimager.imagegenerator.list.ImagesCapImageGenerator;
 import layeredimager.imagegenerator.tree.CapsImageGenerator;
 import layeredimager.imagegenerator.tree.UsersImageGenerator;
+import layeredimager.view.AddImageView;
 import layeredimager.view.memorystatus.GenerarMatrizCapaView;
 import layeredimager.view.user.AddUserView;
 import layeredimager.view.user.DeleteUserView;
@@ -51,6 +53,10 @@ public class PrincipalUIController implements ActionListener {
     DeleteUserView deleteUV = new DeleteUserView();
     DeleteUserController deleteUC = new DeleteUserController(deleteUV);
     
+    //Vista y controlador para add image a user
+    AddImageView addImageV = new AddImageView();
+    AddImageController addImageC = new AddImageController(addImageV);
+    
     public PrincipalUIController(PrincipalView view) {
         this.view = view;
         
@@ -62,6 +68,7 @@ public class PrincipalUIController implements ActionListener {
         this.view.getItmDeleteUser().addActionListener(this);
         this.view.getItmEditUser().addActionListener(this);
         this.view.getItmAddImage().addActionListener(this);
+        this.view.getItmDelImg().addActionListener(this);
         
         this.view.getItmListImg().addActionListener(this);
         this.view.getItmTreeCaps().addActionListener(this);
@@ -104,7 +111,10 @@ public class PrincipalUIController implements ActionListener {
         } else if (e.getSource() == view.getItmDeleteUser()) {
             deleteUC.setUsers(usersC.getUsers());
             deleteUC.iniciar(view.getPnlDesk());
-            System.out.println("deleteuser");
+        } else if (e.getSource() == view.getItmAddImage()) {
+            addImageC.setUsers(usersC.getUsers());
+            addImageC.setImages(imagesC.getImages());
+            addImageC.iniciar(view.getPnlDesk());
         }
     }
 

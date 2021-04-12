@@ -43,6 +43,7 @@ public class PrincipalView extends javax.swing.JFrame {
         itmEditUser = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         itmAddImage = new javax.swing.JMenuItem();
+        itmDelImg = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         itmListImg = new javax.swing.JMenuItem();
         itmTreeCaps = new javax.swing.JMenuItem();
@@ -100,8 +101,11 @@ public class PrincipalView extends javax.swing.JFrame {
 
         jMenu2.setText("Imagenes");
 
-        itmAddImage.setText("Agregar imagen");
+        itmAddImage.setText("Agregar imagen a usuario");
         jMenu2.add(itmAddImage);
+
+        itmDelImg.setText("Eliminar imagen de usuario");
+        jMenu2.add(itmDelImg);
 
         jMenuBar1.add(jMenu2);
 
@@ -147,6 +151,7 @@ public class PrincipalView extends javax.swing.JFrame {
     private javax.swing.JMenuItem itmCargaCaps;
     private javax.swing.JMenuItem itmCargaImages;
     private javax.swing.JMenuItem itmCargaUsers;
+    private javax.swing.JMenuItem itmDelImg;
     private javax.swing.JMenuItem itmDeleteUser;
     private javax.swing.JMenuItem itmEditUser;
     private javax.swing.JMenuItem itmImgCaps;
@@ -211,5 +216,9 @@ public class PrincipalView extends javax.swing.JFrame {
 
     public JMenuItem getItmEditUser() {
         return itmEditUser;
+    }
+
+    public JMenuItem getItmDelImg() {
+        return itmDelImg;
     }
 }

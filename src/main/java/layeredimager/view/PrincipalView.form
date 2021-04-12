@@ -55,7 +55,12 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="itmAddImage">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Agregar imagen"/>
+                <Property name="text" type="java.lang.String" value="Agregar imagen a usuario"/>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="itmDelImg">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Eliminar imagen de usuario"/>
               </Properties>
             </MenuItem>
           </SubComponents>
