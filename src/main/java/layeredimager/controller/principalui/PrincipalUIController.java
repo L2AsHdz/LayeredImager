@@ -8,10 +8,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import layeredimager.controller.cargadatos.CargaUsersController;
 import layeredimager.controller.memorystatus.GenerarMatrizCapaController;
+import layeredimager.controller.user.AddUserController;
 import layeredimager.imagegenerator.list.ImagesCapImageGenerator;
 import layeredimager.imagegenerator.tree.CapsImageGenerator;
 import layeredimager.imagegenerator.tree.UsersImageGenerator;
 import layeredimager.view.memorystatus.GenerarMatrizCapaView;
+import layeredimager.view.user.AddUserView;
 
 /**
  *
@@ -39,6 +41,10 @@ public class PrincipalUIController implements ActionListener {
     GenerarMatrizCapaView generarMatrizV = new GenerarMatrizCapaView();
     GenerarMatrizCapaController generarMatrizC = new GenerarMatrizCapaController(generarMatrizV, capasC.getCapas());
     
+    //Vista y controlador para add User
+    AddUserView addUserV = new AddUserView();
+    AddUserController addUserC = new AddUserController(addUserV);
+    
     public PrincipalUIController(PrincipalView view) {
         this.view = view;
         
@@ -46,8 +52,10 @@ public class PrincipalUIController implements ActionListener {
         this.view.getItmCargaImages().addActionListener(this);
         this.view.getItmCargaUsers().addActionListener(this);
         
-        this.view.getItmUser().addActionListener(this);
-        this.view.getItmImage().addActionListener(this);
+        this.view.getItmAddUser().addActionListener(this);
+        this.view.getItmDeleteUser().addActionListener(this);
+        this.view.getItmEditUser().addActionListener(this);
+        this.view.getItmAddImage().addActionListener(this);
         
         this.view.getItmListImg().addActionListener(this);
         this.view.getItmTreeCaps().addActionListener(this);
@@ -84,6 +92,8 @@ public class PrincipalUIController implements ActionListener {
         } else if (e.getSource() == view.getItmListImg()) {
             var imageG = new ImagesCapImageGenerator(imagesC.getImages());
             imageG.generate();
+        } else if (e.getSource() == view.getItmAddUser()) {
+            addUserC.iniciar(view.getPnlDesk());
         }
     }
 

@@ -26,19 +26,36 @@
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="jMenu2">
+        <Menu class="javax.swing.JMenu" name="jMenu1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="CRUD"/>
+            <Property name="text" type="java.lang.String" value="Usuario"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="itmUser">
+            <MenuItem class="javax.swing.JMenuItem" name="itmAddUser">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Usuarios"/>
+                <Property name="text" type="java.lang.String" value="Agregar usuario"/>
               </Properties>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="itmImage">
+            <MenuItem class="javax.swing.JMenuItem" name="itmDeleteUser">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Imagenes"/>
+                <Property name="text" type="java.lang.String" value="Eliminar usuario"/>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="itmEditUser">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Modificar usuario"/>
+              </Properties>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="jMenu2">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Imagenes"/>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="itmAddImage">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Agregar imagen"/>
               </Properties>
             </MenuItem>
           </SubComponents>
