@@ -10,6 +10,7 @@ import layeredimager.controller.cargadatos.CargaUsersController;
 import layeredimager.controller.memorystatus.GenerarMatrizCapaController;
 import layeredimager.imagegenerator.ImageGenerator;
 import layeredimager.imagegenerator.tree.CapsImageGenerator;
+import layeredimager.imagegenerator.tree.UsersImageGenerator;
 import layeredimager.view.memorystatus.GenerarMatrizCapaView;
 
 /**
@@ -78,7 +79,8 @@ public class PrincipalUIController implements ActionListener {
             var capGenerator = new CapsImageGenerator(capasC.getCapas());
             capGenerator.generate();
         } else if (e.getSource() == view.getItmTreeUsers()) {
-            //generarImagenUsers(usersC.getUsers());
+            var usersImageG = new UsersImageGenerator(usersC.getUsers());
+            usersImageG.generate();
         }
     }
 
