@@ -2,12 +2,11 @@ package layeredimager.controller.principalui;
 
 import layeredimager.controller.cargadatos.CargaCapasController;
 import layeredimager.controller.cargadatos.CargaImagesController;
-import layeredimager.edd.list.CircularList;
-import layeredimager.edd.tree.ArbolAVL;
 import layeredimager.view.PrincipalView;
 import layeredimager.view.cargadatos.CargaFileView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import layeredimager.controller.cargadatos.CargaUsersController;
 
 /**
  *
@@ -19,9 +18,6 @@ public class PrincipalUIController implements ActionListener {
     
     private PrincipalView view;
     
-    private ArbolAVL capas;
-    private CircularList imagenes;
-    
     //Vista y Controllador para cargar capas
     CargaFileView capasV = new CargaFileView();
     CargaCapasController capasC = new CargaCapasController(capasV);
@@ -29,7 +25,11 @@ public class PrincipalUIController implements ActionListener {
     //Vista y controlador para cargar imagenes
     CargaFileView imagesV = new CargaFileView();
     CargaImagesController imagesC = new CargaImagesController(imagesV);
-
+    
+    //Vista y controlador para cargar usuarios
+    CargaFileView usersV = new CargaFileView();
+    CargaUsersController usersC = new CargaUsersController(usersV);
+    
     public PrincipalUIController(PrincipalView view) {
         this.view = view;
         
@@ -62,7 +62,8 @@ public class PrincipalUIController implements ActionListener {
             imagesC.setCapas(capasC.getCapas());
             imagesC.iniciar(view.getPnlDesk());
         } else if (e.getSource() == view.getItmCargaUsers()) {
-            
+            usersC.setImages(imagesC.getImages());
+            usersC.iniciar(view.getPnlDesk());
         }
     }
 

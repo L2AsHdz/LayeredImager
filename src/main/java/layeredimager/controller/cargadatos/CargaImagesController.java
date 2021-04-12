@@ -11,7 +11,6 @@ import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import layeredimager.edd.list.CircularList;
 import layeredimager.edd.list.Lista;
-import layeredimager.model.cap.Capa;
 import layeredimager.model.image.Imagen;
 
 /**
@@ -105,5 +104,9 @@ public class CargaImagesController implements ActionListener {
 
     public void setCapas(ArbolAVL capas) {
         this.capas = capas;
+    }
+
+    public CircularList getImages() {
+        return images;
     }
 }
