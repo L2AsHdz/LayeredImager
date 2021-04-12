@@ -13,6 +13,7 @@ import layeredimager.codegenerator.sparsematrix.SparseMatrixGraphvizCodeGenerato
 import layeredimager.model.Objeto;
 import layeredimager.model.cap.Capa;
 import static layeredimager.controller.FileController.abrirArchivo;
+import layeredimager.imagegenerator.sparsematrix.SparseMatrixImageGenerator;
 
 /**
  *
@@ -46,9 +47,8 @@ public class GenerarMatrizCapaController implements ActionListener {
     public void actionPerformed(ActionEvent ae) {
         String idCapa = (String) generarMView.getCbCapas().getSelectedItem();
         Capa capa = (Capa) capas.get(Integer.parseInt(idCapa));
-        generarArchivoDot(capa.getMatriz());
-        generarPng();
-        abrirArchivo("matriz.png");
+        var matrixImageG = new SparseMatrixImageGenerator(capa.getMatriz());
+        matrixImageG.generate();
     }
 
     private void cargarDatos(TreeNode<Objeto> root) {
@@ -56,23 +56,6 @@ public class GenerarMatrizCapaController implements ActionListener {
             cargarDatos(root.getLeft());
             generarMView.getCbCapas().addItem("" + root.getDato().getId());
             cargarDatos(root.getRight());
-        }
-    }
-
-    private void generarArchivoDot(SparseMatrix matriz) {
-        var generator = new SparseMatrixGraphvizCodeGenerator(matriz);
-        saveFile("matriz.dot", generator.generate());
-    }
-
-    private void generarPng() {
-        try {
-            ProcessBuilder pbuilder;
-            pbuilder = new ProcessBuilder("dot", "-Tpng", "-o", "matriz.png", "matriz.dot");
-            pbuilder.redirectErrorStream(true);
-            pbuilder.start();
-
-        } catch (IOException e) {
-            e.printStackTrace(System.out);
         }
     }
 }

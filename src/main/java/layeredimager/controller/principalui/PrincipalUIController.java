@@ -75,7 +75,7 @@ public class PrincipalUIController implements ActionListener {
         } else if (e.getSource() == view.getItmCaps()) {
             generarMatrizC.iniciar(view.getPnlDesk());
         } else if (e.getSource() == view.getItmTreeCaps()) {
-            ImageGenerator capGenerator = new CapsImageGenerator(capasC.getCapas());
+            var capGenerator = new CapsImageGenerator(capasC.getCapas());
             capGenerator.generate();
         } else if (e.getSource() == view.getItmTreeUsers()) {
             //generarImagenUsers(usersC.getUsers());
