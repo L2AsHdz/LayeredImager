@@ -7,6 +7,8 @@ import layeredimager.view.cargadatos.CargaFileView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import layeredimager.controller.cargadatos.CargaUsersController;
+import layeredimager.controller.memorystatus.GenerarMatrizCapaController;
+import layeredimager.view.memorystatus.GenerarMatrizCapaView;
 
 /**
  *
@@ -29,6 +31,10 @@ public class PrincipalUIController implements ActionListener {
     //Vista y controlador para cargar usuarios
     CargaFileView usersV = new CargaFileView();
     CargaUsersController usersC = new CargaUsersController(usersV);
+    
+    //Vista y controlador para generar matriz de capa
+    GenerarMatrizCapaView generarMatrizV = new GenerarMatrizCapaView();
+    GenerarMatrizCapaController generarMatrizC = new GenerarMatrizCapaController(generarMatrizV, capasC.getCapas());
     
     public PrincipalUIController(PrincipalView view) {
         this.view = view;
@@ -64,6 +70,8 @@ public class PrincipalUIController implements ActionListener {
         } else if (e.getSource() == view.getItmCargaUsers()) {
             usersC.setImages(imagesC.getImages());
             usersC.iniciar(view.getPnlDesk());
+        } else if (e.getSource() == view.getItmCaps()) {
+            generarMatrizC.iniciar(view.getPnlDesk());
         }
     }
 
