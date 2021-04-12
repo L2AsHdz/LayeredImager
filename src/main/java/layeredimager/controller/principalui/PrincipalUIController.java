@@ -93,6 +93,7 @@ public class PrincipalUIController implements ActionListener {
             var imageG = new ImagesCapImageGenerator(imagesC.getImages());
             imageG.generate();
         } else if (e.getSource() == view.getItmAddUser()) {
+            addUserC.setUsers(usersC.getUsers());
             addUserC.iniciar(view.getPnlDesk());
         }
     }
