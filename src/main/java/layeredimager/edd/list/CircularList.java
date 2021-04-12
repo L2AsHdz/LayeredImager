@@ -127,4 +127,8 @@ public class CircularList {
     public boolean isEmpty() {
         return primero == null;
     }
+
+    public Nodo<Imagen> getPrimero() {
+        return primero;
+    }
 }

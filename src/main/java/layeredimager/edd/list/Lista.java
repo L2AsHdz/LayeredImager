@@ -95,4 +95,8 @@ public class Lista {
             }
         }
     }
+
+    public Nodo<Objeto> getInicio() {
+        return inicio;
+    }
 }

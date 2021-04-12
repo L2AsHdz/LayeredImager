@@ -8,7 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import layeredimager.controller.cargadatos.CargaUsersController;
 import layeredimager.controller.memorystatus.GenerarMatrizCapaController;
-import layeredimager.imagegenerator.ImageGenerator;
+import layeredimager.imagegenerator.list.ImagesCapImageGenerator;
 import layeredimager.imagegenerator.tree.CapsImageGenerator;
 import layeredimager.imagegenerator.tree.UsersImageGenerator;
 import layeredimager.view.memorystatus.GenerarMatrizCapaView;
@@ -81,6 +81,9 @@ public class PrincipalUIController implements ActionListener {
         } else if (e.getSource() == view.getItmTreeUsers()) {
             var usersImageG = new UsersImageGenerator(usersC.getUsers());
             usersImageG.generate();
+        } else if (e.getSource() == view.getItmListImg()) {
+            var imageG = new ImagesCapImageGenerator(imagesC.getImages());
+            imageG.generate();
         }
     }
 
