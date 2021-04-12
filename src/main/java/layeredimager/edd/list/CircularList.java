@@ -39,14 +39,14 @@ public class CircularList {
     
     public Imagen get(int id) {
         Nodo<Imagen> actual = primero;
-        
+
         do {
             if (actual.getDato().getId() == id) {
                 return actual.getDato();
             }
             actual = actual.getNext();
         } while (actual != primero);
-        
+
         return null;
     }
 
@@ -96,11 +96,34 @@ public class CircularList {
 
         }
     }
-    
+
+    public void sort() {
+        Nodo<Imagen> actual;
+        Nodo<Imagen> next;
+        Imagen temp;
+        
+        if (size > 1) {
+            for (int i = 0; i < size; i++) {
+                actual = primero;
+                next = actual.getNext();
+                for (int j = 0; j < (size - 1); j++) {
+                    if (actual.getDato().getId() > next.getDato().getId()) {
+                        temp = actual.getDato();
+                        actual.setDato(next.getDato());
+                        next.setDato(temp);
+                    }
+                    actual = next;
+                    next = next.getNext();
+                }
+            }
+            System.out.println("Lista ordenada");
+        }
+    }
+
     public int size() {
         return this.size;
     }
-    
+
     public boolean isEmpty() {
         return primero == null;
     }

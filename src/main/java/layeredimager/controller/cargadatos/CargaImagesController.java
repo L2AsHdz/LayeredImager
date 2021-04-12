@@ -3,14 +3,16 @@ package layeredimager.controller.cargadatos;
 import layeredimager.analyzer.ImageFileAnalyzer;
 import static layeredimager.controller.FileController.readFile;
 import layeredimager.edd.tree.ArbolAVL;
-import layeredimager.model.image.PreImagen;
 import layeredimager.view.cargadatos.CargaFileView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
 import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import layeredimager.edd.list.CircularList;
+import layeredimager.edd.list.Lista;
+import layeredimager.model.cap.Capa;
+import layeredimager.model.image.Imagen;
 
 /**
  *
@@ -21,8 +23,8 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class CargaImagesController implements ActionListener {
 
     private final CargaFileView imagesV;
+    private CircularList images = new CircularList();
     private ArbolAVL capas;
-    private List<PreImagen> preImagenes;
 
     public CargaImagesController(CargaFileView imagesV) {
         this.imagesV = imagesV;
@@ -74,17 +76,34 @@ public class CargaImagesController implements ActionListener {
     }
 
     private void cargarDatos(String text) {
+        StringBuilder texto = new StringBuilder();
         ImageFileAnalyzer analyzer = new ImageFileAnalyzer();
         analyzer.analyze(text);
-        preImagenes = analyzer.getPreImagenes();
-        imagesV.getTxtAreaInfo().setText("Imagenes cargadas al sistema exitosamente!");
+
+        analyzer.getPreImagenes().forEach(i -> {
+            boolean canSaved = true;
+            Lista capasList = new Lista();
+            for (Integer c : i.getCapas()) {
+                try {
+                    capasList.add(capas.get(c));
+                } catch (Exception e) {
+                    canSaved = false;
+                    texto.append("La capa ").append(c).append(" no existe en el sistema\n");
+                }
+            }
+            if (canSaved) {
+                images.add(new Imagen(i.getId(), capasList));
+                texto.append("Imagen ").append(i.getId()).append(" ingresada al sistema\n");
+            } else {
+                texto.append("No se ingreso al sistema la imagen ").append(i.getId()).append("\n");
+            }
+        });
+        images.sort();
+        images.show();
+        imagesV.getTxtAreaInfo().setText(texto.toString());
     }
 
     public void setCapas(ArbolAVL capas) {
         this.capas = capas;
-    }
-
-    public List<PreImagen> getPreImagenes() {
-        return preImagenes;
     }
 }

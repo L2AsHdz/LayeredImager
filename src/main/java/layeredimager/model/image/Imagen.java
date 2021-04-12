@@ -17,9 +17,10 @@ public class Imagen extends Objeto {
     public Imagen() {
     }
 
-    public Imagen(int id) {
+    public Imagen(int id, Lista capas) {
         super(id);
         this.nombre = "Imagen_" + String.valueOf(id);
+        this.capas = capas;
     }
 
     public String getNombre() {
