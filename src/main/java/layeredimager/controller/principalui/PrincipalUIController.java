@@ -8,13 +8,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import layeredimager.controller.cargadatos.CargaUsersController;
 import layeredimager.controller.image.AddImageController;
+import layeredimager.controller.image.DeleteImageController;
 import layeredimager.controller.memorystatus.GenerarMatrizCapaController;
 import layeredimager.controller.user.AddUserController;
 import layeredimager.controller.user.DeleteUserController;
 import layeredimager.imagegenerator.list.ImagesCapImageGenerator;
 import layeredimager.imagegenerator.tree.CapsImageGenerator;
 import layeredimager.imagegenerator.tree.UsersImageGenerator;
-import layeredimager.view.AddImageView;
+import layeredimager.view.image.AddImageView;
+import layeredimager.view.image.DeleteImageView;
 import layeredimager.view.memorystatus.GenerarMatrizCapaView;
 import layeredimager.view.user.AddUserView;
 import layeredimager.view.user.DeleteUserView;
@@ -56,6 +58,10 @@ public class PrincipalUIController implements ActionListener {
     //Vista y controlador para add image a user
     AddImageView addImageV = new AddImageView();
     AddImageController addImageC = new AddImageController(addImageV);
+    
+    //Vista y controlador para borrar imagen de usuario
+    DeleteImageView deleteIV = new DeleteImageView();
+    DeleteImageController deleteIC = new DeleteImageController(deleteIV);
     
     public PrincipalUIController(PrincipalView view) {
         this.view = view;
@@ -115,6 +121,9 @@ public class PrincipalUIController implements ActionListener {
             addImageC.setUsers(usersC.getUsers());
             addImageC.setImages(imagesC.getImages());
             addImageC.iniciar(view.getPnlDesk());
+        } else if (e.getSource() == view.getItmDelImg()) {
+            deleteIC.setUsers(usersC.getUsers());
+            deleteIC.iniciar(view.getPnlDesk());
         }
     }
 

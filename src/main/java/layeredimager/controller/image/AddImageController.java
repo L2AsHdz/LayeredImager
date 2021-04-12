@@ -9,7 +9,7 @@ import layeredimager.edd.list.CircularList;
 import layeredimager.edd.tree.UserArbolAVL;
 import layeredimager.model.image.Imagen;
 import layeredimager.model.user.Usuario;
-import layeredimager.view.AddImageView;
+import layeredimager.view.image.AddImageView;
 
 /**
  *
